@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TextBannerView">
+        <attr name="gap" format="integer" />
+        <attr name="animDuration" format="integer"/>
+    </declare-styleable>
+
+</resources>

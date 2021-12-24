@@ -1,0 +1,115 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 31
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+
+    /**
+     * 基础必须
+     */
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    //kotlin Android 框架的通用库提供扩展程序
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    /**
+     * 架构组件单独依赖（上面已经包含）
+     */
+//    // ViewModel and LiveData
+//    implementation "android.arch.lifecycle:extensions:1.1.1"
+//    // alternatively, just ViewModel
+//    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+//    // alternatively, just LiveData
+//    implementation "android.arch.lifecycle:livedata:1.1.1"
+//    // 须iava 8支持
+//    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+//    // Java8 support for Lifecycles
+//    implementation "android.arch.lifecycle:common-java8:1.1.1"
+
+    /**
+     * kotlin 其它扩展库
+     */
+    // Activity扩展
+    // implementation "androidx.activity:activity-ktx:1.2.2"
+    //Fragment KTX 模块提供了一系列扩展程序以简化 Fragment API
+    implementation "androidx.fragment:fragment-ktx:1.3.3"
+    // Navigation KTX(以下三个库)
+    implementation "androidx.navigation:navigation-runtime-ktx:2.3.5"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+    // 集合扩展库
+    implementation "androidx.collection:collection-ktx:1.1.0"
+    // 动画扩展库（确实是动画扩展包含关系）
+//    implementation "androidx.core:core-ktx:1.3.2"
+    //Palette KTX 模块为使用调色板提供惯用的 Kotlin 支持
+    implementation "androidx.palette:palette-ktx:1.0.0"
+    //利用 Reactive Streams KTX 模块可根据 ReactiveStreams 发布程序来创建可监测的 LiveData 流
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.1"
+    //Room 扩展程序增加了对数据库事务的协程支持。
+    implementation "androidx.room:room-ktx:2.3.0"
+    //SQLite 扩展程序将与 SQL 相关的代码封装在事务中，从而避免编写大量样板代码。
+    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
+    //WorkManager KTX
+    implementation "androidx.work:work-runtime-ktx:2.5.0"
+
+    /**
+     * Kotlin 协程与架构组件一起使用 所用扩展依赖
+     */
+    // ViewModel KTX
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    //Lifecycle KTX
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+    //LiveData KTX
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // 扩展库列表 https://developer.android.google.cn/kotlin/ktx/extensions-list
+
+    /**
+     * okHttp
+     */
+    // define a BOM and its version
+//    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
+//    // define any required OkHttp artifacts without version
+//    implementation("com.squareup.okhttp3:okhttp")
+//    implementation("com.squareup.okhttp3:logging-interceptor")
+    api 'com.squareup.okhttp3:okhttp:4.9.1'
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
