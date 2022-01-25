@@ -26,8 +26,7 @@ object HttpExecute {
         headers: Headers = DEFAULT_HEADERS,
         method: HttpMethod = HttpMethod.GET
     ) {
-        buildRequestBody("".toMediaType(),params,method)
-        val body = getBody()
+        val body = buildRequestBody("".toMediaType(),params,method)
         val request: Request = Request.Builder().headers(headers).url(buildUrl(url, method, params))
             .method(method.name, body).build()
         OKHTTP_CLIENT.newCall(request).enqueue(callback)
