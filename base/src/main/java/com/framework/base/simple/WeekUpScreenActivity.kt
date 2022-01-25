@@ -27,7 +27,7 @@ class WeekUpScreenActivity : AppCompatActivity() {
             this@WeekUpScreenActivity,
             WeekUpScreenActivity::class.java
         )
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
         startActivity(intent)
     }
 }
