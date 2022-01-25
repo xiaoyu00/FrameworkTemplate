@@ -4,6 +4,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.Headers
 import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.lang.Exception
@@ -24,7 +26,7 @@ object HttpExecute {
         headers: Headers = DEFAULT_HEADERS,
         method: HttpMethod = HttpMethod.GET
     ) {
-        buildRequestBody(,)
+        buildRequestBody("".toMediaType(),params,method)
         val body = getBody()
         val request: Request = Request.Builder().headers(headers).url(buildUrl(url, method, params))
             .method(method.name, body).build()

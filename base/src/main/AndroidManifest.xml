@@ -7,6 +7,9 @@
 
     <application>
         <activity
+            android:name=".simple.PermissionActivity"
+            android:exported="false" />
+        <activity
             android:name=".simple.WeekUpScreenActivity"
             android:exported="false" />
         <activity
