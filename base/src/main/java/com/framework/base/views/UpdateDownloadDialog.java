@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -13,11 +12,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
 import com.framework.base.R;
 import com.framework.base.utils.FormatterUtil;
-import com.framework.base.utils.UnitConversionUtils;
+import com.framework.base.utils.DensityUtils;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -135,7 +133,7 @@ public class UpdateDownloadDialog implements View.OnClickListener {
         //进度条的刻度值
         float max = Math.abs(seekBar.getMax());
         //这不叫thumb的宽度,叫seekbar距左边宽度,实验了一下，seekbar 不是顶格的，两头都存在一定空间，所以xml 需要用paddingStart 和 paddingEnd 来确定具体空了多少值,我这里设置15dp;
-        float thumb = UnitConversionUtils.INSTANCE.dpToPx(context, 15);
+        float thumb = DensityUtils.INSTANCE.dpToPx(context, 15);
         //每移动1个单位，text应该变化的距离 = (seekBar的宽度 - 两头空的空间) / 总的progress长度
         float average = (((float) seekBar.getWidth()) - 2 * thumb) / max;
         //int to float
