@@ -14,7 +14,7 @@ import java.util.*
  * 注：在Android 11 定位权限【ACCESS_BACKGROUND_LOCATION】需要单独申请
  */
 class PermissionActivity : AppCompatActivity() {
-    var permissions = arrayOf(
+    private var permissions = arrayOf(
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.ACCESS_NETWORK_STATE,
         Manifest.permission.ACCESS_WIFI_STATE,
