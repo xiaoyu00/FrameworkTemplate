@@ -8,6 +8,9 @@ import com.framework.base.R
 
 /**
  * 锁屏唤醒并解锁屏幕
+ * 需要添加权限
+ * <uses-permission android：name="android.permission.WAKE_LOCK" />
+ * <uses-permission android：name="android.permission.DISABLE_KEYGUARD" />
  */
 class WeekUpScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
