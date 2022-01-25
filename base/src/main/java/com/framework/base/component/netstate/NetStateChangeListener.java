@@ -1,4 +1,4 @@
-package com.framework.base.netstate;
+package com.framework.base.component.netstate;
 
 public interface NetStateChangeListener {
     void onDisconnect();

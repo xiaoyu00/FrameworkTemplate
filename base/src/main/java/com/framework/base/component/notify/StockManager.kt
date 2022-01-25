@@ -1,4 +1,4 @@
-package com.framework.base.notify
+package com.framework.base.component.notify
 
 /**
  * 里面做输出处理 如:计数器

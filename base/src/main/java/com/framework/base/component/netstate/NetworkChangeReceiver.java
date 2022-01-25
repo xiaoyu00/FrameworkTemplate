@@ -1,10 +1,9 @@
-package com.framework.base.netstate;
+package com.framework.base.component.netstate;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 
 import com.framework.base.utils.NetWorkStateUtils;
