@@ -4,7 +4,11 @@
     package="com.framework.base">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application>
+        <activity
+            android:name=".simple.WeekUpScreenActivity"
+            android:exported="false" />
         <activity
             android:name=".simple.WorkLoadingFragmentActivity"
             android:exported="true" />
