@@ -1,8 +1,11 @@
 package com.framework.base.utils
 
 import android.app.Activity
+import android.app.ActivityManager
+import android.app.KeyguardManager
 import android.content.Context
 import android.os.Build
+import android.os.PowerManager
 import android.telephony.TelephonyManager
 import java.util.*
 
@@ -13,7 +16,7 @@ import java.util.*
  * @date 2021/4/15
  * @description
  */
-object DeviceInfoUtil {
+object DeviceUtil {
     /**
      * 获取当前手机系统语言。
      *
@@ -71,5 +74,42 @@ object DeviceInfoUtil {
         } else {
             tm.deviceId
         }
+    }
+    fun isAppRunningForeground(context: Context): Boolean {
+        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val runningAppProcessInfos = activityManager.runningAppProcesses ?: return false
+        val packageName = context.packageName
+        for (appProcessInfo in runningAppProcessInfos) {
+            if (appProcessInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+                && appProcessInfo.processName == packageName
+            ) {
+                return true
+            }
+        }
+        return false
+    }
+    /**
+     * 唤醒手机屏幕并解锁
+     */
+    fun wakeUpAndUnlock(context: Context) {
+        //获取电源管理器对象
+        val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+
+        //获取PowerManager.WakeLock对象，后面的参数|表示同时传入两个值，最后的是调试用的Tag
+        val wl = pm.newWakeLock(
+            PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.SCREEN_BRIGHT_WAKE_LOCK,
+            "BaseApplication:bright"
+        )
+
+        //点亮屏幕
+        wl.acquire()
+        wl.release()
+
+        //得到键盘锁管理器对象
+        val km = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+        val kl = km.newKeyguardLock("unLock")
+
+        //解锁
+        kl.disableKeyguard()
     }
 }

@@ -1,10 +1,13 @@
 package com.framework.base.simple
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.framework.base.R
 import com.framework.base.utils.PermissionUtils
 import java.util.*
@@ -25,7 +28,8 @@ class PermissionActivity : AppCompatActivity() {
         Manifest.permission.RECORD_AUDIO,
         Manifest.permission.MODIFY_AUDIO_SETTINGS
     )
-
+    private var isFirst = true
+    private var alertDialog: AlertDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permssion)
@@ -35,10 +39,52 @@ class PermissionActivity : AppCompatActivity() {
         val permissionList: List<String> =
             PermissionUtils.checkMorePermissions(this, listOf(*permissions))
         if (permissionList.isEmpty()) {
-            Toast.makeText(this@PermissionActivity, "权限通过", Toast.LENGTH_SHORT).show()
+            if (!PermissionUtils.checkPermission(
+                    this,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                )
+            ) {
+                PermissionUtils.requestPermission(
+                    this,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                    1008612
+                )
+            }
         } else {
             PermissionUtils.requestMorePermissions(this, listOf(*permissions), 1008611)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!isFirst && alertDialog?.isShowing == false) {
+            if (!Settings.canDrawOverlays(this)) {
+                AlertDialog.Builder(this).setTitle("视频通话功能需允许在应用上层显示").setPositiveButton(
+                    "去设置"
+                ) { dialogInterface, i ->
+                    dialogInterface.dismiss()
+                    val intent =
+                        Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                    startActivity(intent)
+                }.setNegativeButton(
+                    "取消"
+                ) { dialogInterface, i -> dialogInterface.dismiss() }.create().show()
+            }
+        }
+        isFirst = false
+    }
+
+    private fun startPermissionSetting() {
+        alertDialog = AlertDialog.Builder(this).setTitle("视频通话功能需要以下权限")
+            .setMessage("1.锁屏显示\n2.后台弹出界面\n3.显示悬浮窗\n\n[设置-> 权限管理]").setPositiveButton(
+                "去设置"
+            ) { dialogInterface, i ->
+                dialogInterface.dismiss()
+                PermissionUtils.toAppSetting(this@PermissionActivity)
+            }.setNegativeButton(
+                "取消"
+            ) { dialogInterface, i -> dialogInterface.dismiss() }.create()
+        alertDialog?.show()
     }
 
     override fun onRequestPermissionsResult(
@@ -47,24 +93,33 @@ class PermissionActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        var isPermissionSuccess = true
-        for (grantResult in grantResults) {
-            if (grantResult != PackageManager.PERMISSION_GRANTED) {
-                isPermissionSuccess = false
-                break
+        if (requestCode == 1008612 || requestCode == 1008611) {
+            var isPermissionSuccess = true
+            for (grantResult in grantResults) {
+                if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                    isPermissionSuccess = false
+                    break
+                }
             }
-        }
-        if (isPermissionSuccess) {
-            if (!PermissionUtils.checkPermission(
+            if (isPermissionSuccess) {
+                if (!PermissionUtils.checkPermission(
+                        this@PermissionActivity,
+                        Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                    )
+                ) {
+                    PermissionUtils.requestPermission(
+                        this@PermissionActivity,
+                        Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                        1008612
+                    )
+                }
+            }
+            if (permissions.size == 1 && permissions[0] == Manifest.permission.ACCESS_BACKGROUND_LOCATION) if (!PermissionUtils.checkPermission(
                     this@PermissionActivity,
-                    Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                    Manifest.permission.SYSTEM_ALERT_WINDOW
                 )
             ) {
-                PermissionUtils.requestPermission(
-                    this@PermissionActivity,
-                    Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-                    1008612
-                )
+                startPermissionSetting()
             }
         }
     }
