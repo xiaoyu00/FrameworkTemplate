@@ -1,3 +1,7 @@
 include ':app'
 rootProject.name = "FrameworkTemplate"
 include ':base'
+include ':mediaselect'
+include ':compress'
+include ':ucrop'
+include ':selector'

@@ -95,16 +95,17 @@ object DeviceUtil {
         //获取电源管理器对象
         val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
 
-        //获取PowerManager.WakeLock对象，后面的参数|表示同时传入两个值，最后的是调试用的Tag
-        val wl = pm.newWakeLock(
-            PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.SCREEN_BRIGHT_WAKE_LOCK,
-            "BaseApplication:bright"
-        )
+        if(!pm.isInteractive) {
+            //获取PowerManager.WakeLock对象，后面的参数|表示同时传入两个值，最后的是调试用的Tag
+            val wl = pm.newWakeLock(
+                PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.SCREEN_BRIGHT_WAKE_LOCK,
+                "BaseApplication:bright"
+            )
 
-        //点亮屏幕
-        wl.acquire()
-        wl.release()
-
+            //点亮屏幕
+            wl.acquire(30 * 1000L)
+            wl.release()
+        }
         //得到键盘锁管理器对象
         val km = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
         val kl = km.newKeyguardLock("unLock")

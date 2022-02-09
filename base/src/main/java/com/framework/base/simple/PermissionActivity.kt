@@ -54,26 +54,20 @@ class PermissionActivity : AppCompatActivity() {
             PermissionUtils.requestMorePermissions(this, listOf(*permissions), 1008611)
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-        if (!isFirst && alertDialog?.isShowing == false) {
-            if (!Settings.canDrawOverlays(this)) {
-                AlertDialog.Builder(this).setTitle("视频通话功能需允许在应用上层显示").setPositiveButton(
-                    "去设置"
-                ) { dialogInterface, i ->
-                    dialogInterface.dismiss()
-                    val intent =
-                        Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-                    startActivity(intent)
-                }.setNegativeButton(
-                    "取消"
-                ) { dialogInterface, i -> dialogInterface.dismiss() }.create().show()
-            }
+    private fun checkAndSetting(){
+        if (!Settings.canDrawOverlays(this)) {
+            AlertDialog.Builder(this).setTitle("视频通话功能需允许在应用上层显示").setPositiveButton(
+                "去设置"
+            ) { dialogInterface, i ->
+                dialogInterface.dismiss()
+                val intent =
+                    Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                startActivity(intent)
+            }.setNegativeButton(
+                "取消"
+            ) { dialogInterface, i -> dialogInterface.dismiss() }.create().show()
         }
-        isFirst = false
     }
-
     private fun startPermissionSetting() {
         alertDialog = AlertDialog.Builder(this).setTitle("视频通话功能需要以下权限")
             .setMessage("1.锁屏显示\n2.后台弹出界面\n3.显示悬浮窗\n\n[设置-> 权限管理]").setPositiveButton(
@@ -114,11 +108,7 @@ class PermissionActivity : AppCompatActivity() {
                     )
                 }
             }
-            if (permissions.size == 1 && permissions[0] == Manifest.permission.ACCESS_BACKGROUND_LOCATION) if (!PermissionUtils.checkPermission(
-                    this@PermissionActivity,
-                    Manifest.permission.SYSTEM_ALERT_WINDOW
-                )
-            ) {
+            if (permissions.size == 1 && permissions[0] == Manifest.permission.ACCESS_BACKGROUND_LOCATION) {
                 startPermissionSetting()
             }
         }

@@ -22,13 +22,13 @@ public class OkHttpDo {
     }
 
     public void doPost(String url, Map<Object, String> params, Callback callback) {
-        FormBody.Builder formBodyBuilder = new FormBody.Builder();
-        formBodyBuilder.add()
-        HttpBody.getPostBody(params);
-        body
-        config
-        Request request = getRequestBuild().url(url).post(formBodyBuilder.build()).build();
-        getOkHttpClient().newCall(request).enqueue(callback);
+//        FormBody.Builder formBodyBuilder = new FormBody.Builder();
+//        formBodyBuilder.add()
+//        HttpBody.getPostBody(params);
+//        body
+//        config
+//        Request request = getRequestBuild().url(url).post(formBodyBuilder.build()).build();
+//        getOkHttpClient().newCall(request).enqueue(callback);
     }
     public void doGet(String url, Map<String, String> params){
 

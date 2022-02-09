@@ -4,10 +4,12 @@
     package="com.framework.base">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 
     <application>
+        <activity
+            android:name=".component.task.TaskSimpleActivity"
+            android:exported="false" />
         <activity
             android:name=".simple.PermissionActivity"
             android:exported="false" />

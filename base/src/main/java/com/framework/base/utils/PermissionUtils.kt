@@ -1,12 +1,14 @@
 package com.framework.base.utils
 
 import android.app.Activity
+import android.app.AppOpsManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
+import android.os.Process
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
@@ -303,4 +305,90 @@ object PermissionUtils {
          */
         fun onUserHasAlreadyTurnedDownAndDontAsk(vararg permission: String?)
     }
+
+    /**
+     * 小米后台锁屏检测方法
+     *
+     * @param context
+     * @return
+     */
+    fun canShowLockView(context: Context): Boolean {
+        var ops: AppOpsManager? = null
+        ops = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
+        try {
+            val op = 10020 // >= 23
+            // ops.checkOpNoThrow(op, uid, packageName)
+            val method = ops!!.javaClass.getMethod(
+                "checkOpNoThrow", *arrayOf<Class<*>?>(
+                    Int::class.javaPrimitiveType,
+                    Int::class.javaPrimitiveType,
+                    String::class.java
+                )
+            )
+            val result = method.invoke(ops, op, Process.myUid(), context.packageName) as Int
+            return result == AppOpsManager.MODE_ALLOWED
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+        return false
+    }
+
+    /**
+     * 小米后台弹出界面
+     *
+     * @param context
+     * @return
+     */
+    fun canShowBackgroundView(context: Context): Boolean {
+        var ops: AppOpsManager? = null
+        ops = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
+        try {
+            val op = 10021
+            val method = ops!!.javaClass.getMethod(
+                "checkOpNoThrow", *arrayOf<Class<*>?>(
+                    Int::class.javaPrimitiveType,
+                    Int::class.javaPrimitiveType,
+                    String::class.java
+                )
+            )
+            val result = method.invoke(ops, op, Process.myUid(), context.packageName) as Int
+            return result == AppOpsManager.MODE_ALLOWED
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+        return false
+    }
+
+    /**
+     * 判断vivo锁屏显示 1未开启 0开启
+     * @param context
+     * @return
+     */
+    fun getVivoLockStatus(context: Context): Int {
+        val packageName = context.packageName
+        val uri2 =
+            Uri.parse("content://com.vivo.permissionmanager.provider.permission/control_locked_screen_action")
+        val selection = "pkgname = ?"
+        val selectionArgs = arrayOf(packageName)
+        try {
+            val cursor = context
+                .contentResolver
+                .query(uri2, null, selection, selectionArgs, null)
+            if (cursor != null) {
+                return if (cursor.moveToFirst()) {
+                    val c=cursor.getColumnIndex("currentstate")
+                    val currentmode = cursor.getInt(c);
+                    cursor.close()
+                    currentmode
+                } else {
+                    cursor.close()
+                    1
+                }
+            }
+        } catch (throwable: Throwable) {
+            throwable.printStackTrace()
+        }
+        return 1
+    }
+
 }

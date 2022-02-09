@@ -5,6 +5,7 @@ import java.io.Serializable
 @Entity(tableName = "table_user", primaryKeys = ["id"])
 data class UserInfo(
     var id: Long,
+    var isOffline: Int?=0,
     var researchLaboratory: Long?=null,
     var baseName: String?=null,
     var area:String?=null,
