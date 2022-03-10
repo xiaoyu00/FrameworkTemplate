@@ -390,5 +390,34 @@ object PermissionUtils {
         }
         return 1
     }
+    /**
+     * 判断后台弹出界面 通用
+     * @param context
+     * @return
+     */
+    fun canDrawOverlay(context: Context):Boolean{
+        return Settings.canDrawOverlays(context)
+    }
 
+    /**
+     * 是否可以安装应用
+     *
+     * @param context
+     * @return
+     */
+    private fun canInstallPackage(context: Context): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.packageManager.canRequestPackageInstalls()
+        } else false
+    }
+
+    /**
+     * 开启安装未知来源权限
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private fun toInstallPermissionSettingIntent(context: Context) {
+        val packageURI = Uri.parse("package:" + context.packageName)
+        val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI)
+        context.startActivity(intent)
+    }
 }
