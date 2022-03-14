@@ -1,6 +1,8 @@
 package com.framework.base.parent
 
+import android.R
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
@@ -27,21 +29,32 @@ abstract class BaseActivity : AppCompatActivity() {
     open fun initBase() {
         setContentView(contextViewId())
     }
+
     private fun setToolBar() {
         getToolBar()?.let {
             toolbar = it
-            setSupportActionBar(toolbar)
-            supportActionBar?.apply {
-                setDisplayHomeAsUpEnabled(true)
-                title = ""
-                toolbar?.setNavigationOnClickListener { finish() }
+            if (supportActionBar == null) {
+                setSupportActionBar(toolbar)
             }
         }
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = getToolBarTitle()
+        }
     }
+
     open fun getToolBar(): Toolbar? = null
+    open fun getToolBarTitle(): String = ""
+
     /**
      * 初始化
      */
     abstract fun initialize()
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }
