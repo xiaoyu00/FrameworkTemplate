@@ -19,10 +19,10 @@ abstract class BaseBindingFragment<D : ViewDataBinding> : BaseFragment() {
         }.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (::dataBinding.isInitialized) {
-            dataBinding.unbind()
-        }
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        if (::dataBinding.isInitialized) {
+//            dataBinding.unbind()
+//        }
+//    }
 }

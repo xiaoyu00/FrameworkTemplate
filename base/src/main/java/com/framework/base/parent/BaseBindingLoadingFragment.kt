@@ -24,11 +24,4 @@ abstract class BaseBindingLoadingFragment<D : ViewDataBinding> : BaseLoadingFrag
 
         return getWorkView()
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (::dataBinding.isInitialized) {
-            dataBinding.unbind()
-        }
-    }
 }
