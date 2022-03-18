@@ -6,9 +6,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.databinding.DataBindingUtil
 import com.framework.base.data.UserInfo
-import com.mc.breeding.R
-import com.mc.breeding.databinding.ItemBreedingCommonIconBinding
-import com.mc.breeding.model.HomeGlide
 
 class GridViewAdapter(private val homeConfigList: List<UserInfo>) : BaseAdapter() {
 
@@ -20,19 +17,20 @@ class GridViewAdapter(private val homeConfigList: List<UserInfo>) : BaseAdapter(
         return position.toLong()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val itemBinding: ItemBreedingCommonIconBinding = if (convertView == null) {
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent?.context),
-                R.layout.item_breeding_common_icon,
-                parent,
-                false
-            )
-        } else {
-            DataBindingUtil.getBinding(convertView)!!
-        }
-        itemBinding.homeGrid = homeConfigList[position]
-        itemBinding.icon.setImageResource(homeConfigList[position].resId)
-        return itemBinding.root
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+//        val itemBinding: ItemBreedingCommonIconBinding = if (convertView == null) {
+//            DataBindingUtil.inflate(
+//                LayoutInflater.from(parent?.context),
+//                R.layout.item_breeding_common_icon,
+//                parent,
+//                false
+//            )
+//        } else {
+//            DataBindingUtil.getBinding(convertView)!!
+//        }
+//        itemBinding.homeGrid = homeConfigList[position]
+//        itemBinding.icon.setImageResource(homeConfigList[position].resId)
+//        return itemBinding.root
+        return null
     }
 }

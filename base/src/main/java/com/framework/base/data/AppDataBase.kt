@@ -17,10 +17,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase
     PictureConverter::class,
 )
 abstract class AppDataBase : RoomDatabase() {
+
     abstract fun userDao(): UserDao
 
     companion object {
-        private lateinit var sInstance: AppDataBase
+        lateinit var appDataBase: AppDataBase
         private val MIGRATION = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL(
@@ -43,13 +44,13 @@ abstract class AppDataBase : RoomDatabase() {
         }
 
         @MainThread
-        fun getDataBase(context: Context): AppDataBase {
-            sInstance = if (::sInstance.isInitialized) sInstance else Room.databaseBuilder(
+        fun initDataBase(context: Context): AppDataBase {
+            appDataBase = if (::appDataBase.isInitialized) appDataBase else Room.databaseBuilder(
                 context,
                 AppDataBase::class.java,
                 "breeding_database"
             ).addMigrations(MIGRATION, MIGRATION_3_4).fallbackToDestructiveMigration().build()
-            return sInstance
+            return appDataBase
         }
     }
 

@@ -1,6 +1,5 @@
 package com.framework.template.simple
 
-import com.framework.base.parent2.BaseBindingActivity2
 import com.framework.template.databinding.ActivityMainBinding
 import com.framework.template.simple.Student
 import com.framework.template.simple.Teacher

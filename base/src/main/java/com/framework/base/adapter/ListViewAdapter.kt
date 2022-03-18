@@ -33,13 +33,14 @@ class ListViewAdapter(private val dataList: List<UserInfo>) : BaseAdapter() {
         return position.toLong()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val binding: ItemBreedingBaseBinding = if (convertView == null) {
-            ItemBreedingBaseBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
-        } else {
-            DataBindingUtil.getBinding(convertView)!!
-        }
-        binding.data = dataList[position]
-        return binding.root
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View?{
+//        val binding: ItemBreedingBaseBinding = if (convertView == null) {
+//            ItemBreedingBaseBinding.inflate(LayoutInflater.from(parent?.context), parent, false)
+//        } else {
+//            DataBindingUtil.getBinding(convertView)!!
+//        }
+//        binding.data = dataList[position]
+//        return binding.root
+        return null
     }
 }

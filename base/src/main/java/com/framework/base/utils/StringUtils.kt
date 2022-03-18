@@ -21,15 +21,25 @@ object StringUtils {
         return s.substring(8, s.length)
     }
 
-    fun getRandomString(length: Int): String? {
-        val base = "abcdefghijklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM0123456789"
-        val random = Random()
-        val sb = StringBuffer()
-        for (i in 0 until length) {
-            val number = random.nextInt(base.length)
-            sb.append(base[number])
-        }
-        return sb.toString()
+//    fun getRandomString(length: Int): String? {
+//        val base = "abcdefghijklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM0123456789"
+//        val random = Random()
+//        val sb = StringBuffer()
+//        for (i in 0 until length) {
+//            val number = random.nextInt(base.length)
+//            sb.append(base[number])
+//        }
+//        return sb.toString()
+//    }
+
+    /**
+     * kotlin 写法
+     */
+    fun getRandomString(length: Int): String {
+        val allowedChars = "abcdefghijklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM0123456789"
+        return (0 until length)
+            .map { allowedChars.random() }
+            .joinToString("")
     }
 
     fun base64ToBitmap(base64String: String?): Bitmap? {

@@ -31,12 +31,9 @@ object CommonUtils {
         clipboard.setPrimaryClip(clipData);
     }
 
-    // 获取随机数【length 随机数长度】
-    fun getRandomString(length: Int): String {
-        val allowedChars = "0123456789"
-        return (1..length)
-            .map { allowedChars.random() }
-            .joinToString("")
+    // 获取随机数
+    fun getRandomNumber(startNumber: Int, endNumber: Int): Int {
+        return (startNumber until endNumber).random()
     }
 }
 

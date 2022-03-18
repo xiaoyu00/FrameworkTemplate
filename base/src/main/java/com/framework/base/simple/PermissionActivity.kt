@@ -3,11 +3,10 @@ package com.framework.base.simple
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.framework.base.R
 import com.framework.base.utils.PermissionUtils
 import java.util.*
@@ -54,7 +53,8 @@ class PermissionActivity : AppCompatActivity() {
             PermissionUtils.requestMorePermissions(this, listOf(*permissions), 1008611)
         }
     }
-    private fun checkAndSetting(){
+
+    private fun checkAndSetting() {
         if (!Settings.canDrawOverlays(this)) {
             AlertDialog.Builder(this).setTitle("视频通话功能需允许在应用上层显示").setPositiveButton(
                 "去设置"
@@ -68,6 +68,7 @@ class PermissionActivity : AppCompatActivity() {
             ) { dialogInterface, i -> dialogInterface.dismiss() }.create().show()
         }
     }
+
     private fun startPermissionSetting() {
         alertDialog = AlertDialog.Builder(this).setTitle("视频通话功能需要以下权限")
             .setMessage("1.锁屏显示\n2.后台弹出界面\n3.显示悬浮窗\n\n[设置-> 权限管理]").setPositiveButton(

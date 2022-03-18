@@ -1,10 +1,5 @@
 package com.framework.template.simple
 
-import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
-import com.framework.base.adapter.BaseAdapter
-import com.framework.base.adapter.BaseMultiTypeAdapter
-
 //class HomeAdapter(private val listener: ItemClickListener<String>) :
 //    BaseAdapter<String, ItemHomeBinding>() {
 //

@@ -2,7 +2,6 @@ package com.framework.template.simple
 
 import android.util.Log
 import android.view.View
-import com.framework.base.parent2.BaseBindingActivity2
 import com.framework.template.databinding.ActivityMainBinding
 
 //class SimpleActivity3 : BaseBindingActivity2<ActivityMainBinding>() {

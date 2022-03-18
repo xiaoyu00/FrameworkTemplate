@@ -1,7 +1,9 @@
 package com.framework.template
 
 import android.Manifest
+import android.content.Intent
 import com.framework.base.parent.BaseViewModelActivity
+import com.framework.base.simple.ListActivity
 import com.framework.mediaselect.AlbumManager
 import com.framework.mediaselect.AlbumOperation
 import com.framework.template.databinding.ActivityMainBinding
@@ -19,10 +21,10 @@ class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>
         dataBinding.tvHello.setOnClickListener {
 //            startActivity(Intent(this, WorkLoadingFragmentActivity::class.java))
 //            startActivity(Intent(this, WorkLoadingActivity::class.java))
-
-            AlbumManager.openCamera(this, AlbumOperation()){
-
-            }
+            startActivity(Intent(this, ListActivity::class.java))
+//            AlbumManager.openCamera(this, AlbumOperation()){
+//
+//            }
         }
     }
 

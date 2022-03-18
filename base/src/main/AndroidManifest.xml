@@ -8,6 +8,9 @@
 
     <application>
         <activity
+            android:name=".simple.ListActivity"
+            android:exported="false" />
+        <activity
             android:name=".component.task.TaskSimpleActivity"
             android:exported="false" />
         <activity
