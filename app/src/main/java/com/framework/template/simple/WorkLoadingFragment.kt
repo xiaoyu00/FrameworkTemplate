@@ -1,12 +1,12 @@
-package com.framework.base.simple
+package com.framework.template.simple
 
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.fragment.app.Fragment
-import com.framework.base.R
-import com.framework.base.databinding.FragmentWorkLoadingBinding
 import com.framework.base.parent.BaseBindingLoadingFragment
+import com.framework.template.R
+import com.framework.template.databinding.FragmentWorkLoadingBinding
 
 // TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"

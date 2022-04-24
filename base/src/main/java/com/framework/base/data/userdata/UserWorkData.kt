@@ -1,6 +1,6 @@
 package com.framework.base.data.userdata
 
-import com.framework.base.data.UserInfo
+import com.framework.base.model.UserInfo
 import com.framework.base.work.retrofit.ResponseDataBean
 import com.framework.base.work.retrofit.RetrofitClient
 import com.framework.base.work.retrofit.STATE_SUCCESS

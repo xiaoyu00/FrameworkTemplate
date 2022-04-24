@@ -1,13 +1,13 @@
-package com.framework.base.simple
+package com.framework.template.simple
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.framework.base.R
 import com.framework.base.views.textbanner.BaseBannerAdapter
 import com.framework.base.views.textbanner.TextBannerView
+import com.framework.template.R
 
 /**
  * text轮播

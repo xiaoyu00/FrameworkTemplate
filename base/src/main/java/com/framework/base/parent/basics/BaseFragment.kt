@@ -1,4 +1,4 @@
-package com.framework.base.parent
+package com.framework.base.parent.basics
 
 import android.os.Bundle
 import android.view.LayoutInflater

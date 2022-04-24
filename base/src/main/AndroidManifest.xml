@@ -6,9 +6,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+
     <application>
         <activity
-            android:name=".simple.ListActivity"
+            android:name=".simple.DataListActivity"
             android:exported="false" />
         <activity
             android:name=".component.task.TaskSimpleActivity"

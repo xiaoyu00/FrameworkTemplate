@@ -1,9 +1,8 @@
 package com.framework.base.component.notify
 
 import androidx.annotation.MainThread
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.framework.base.data.UserInfo
+import com.framework.base.model.UserInfo
 
 class UserNotify : MutableLiveData<Notification<UserInfo>>() {
 

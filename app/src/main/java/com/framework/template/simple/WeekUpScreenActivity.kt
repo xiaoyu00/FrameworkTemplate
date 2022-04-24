@@ -1,10 +1,10 @@
-package com.framework.base.simple
+package com.framework.template.simple
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
-import com.framework.base.R
+import com.framework.template.R
 
 /**
  * 锁屏唤醒并解锁屏幕

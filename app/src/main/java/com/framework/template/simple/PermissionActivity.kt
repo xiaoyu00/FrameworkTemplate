@@ -1,14 +1,15 @@
-package com.framework.base.simple
+package com.framework.template.simple
 
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.framework.base.R
 import com.framework.base.utils.PermissionUtils
+import com.framework.template.R
 import java.util.*
 
 /**
@@ -32,6 +33,9 @@ class PermissionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permssion)
+        findViewById<Button>(R.id.check).setOnClickListener {
+            requestPermissions()
+        }
     }
 
     private fun requestPermissions() {

@@ -1,11 +1,8 @@
 package com.framework.base.parent
 
-import android.graphics.Color
-import android.util.Log
-import android.view.LayoutInflater
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.framework.base.parent.basics.BaseLoadingActivity
 
 /**
  * Data binding Activity 基类

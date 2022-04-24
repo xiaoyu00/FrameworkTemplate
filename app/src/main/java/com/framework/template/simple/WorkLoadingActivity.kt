@@ -1,9 +1,9 @@
-package com.framework.base.simple
+package com.framework.template.simple
 
 import android.os.Handler
-import com.framework.base.R
-import com.framework.base.databinding.ActivityWorkLoadingBinding
 import com.framework.base.parent.BaseBindingLoadingActivity
+import com.framework.template.R
+import com.framework.template.databinding.ActivityWorkLoadingBinding
 
 class WorkLoadingActivity : BaseBindingLoadingActivity<ActivityWorkLoadingBinding>() {
     override fun contextViewId(): Int = R.layout.activity_work_loading

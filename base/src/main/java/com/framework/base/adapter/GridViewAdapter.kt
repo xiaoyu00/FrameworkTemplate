@@ -1,11 +1,9 @@
 package com.framework.base.adapter
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import androidx.databinding.DataBindingUtil
-import com.framework.base.data.UserInfo
+import com.framework.base.model.UserInfo
 
 class GridViewAdapter(private val homeConfigList: List<UserInfo>) : BaseAdapter() {
 

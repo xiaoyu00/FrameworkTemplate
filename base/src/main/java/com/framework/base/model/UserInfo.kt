@@ -1,4 +1,4 @@
-package com.framework.base.data
+package com.framework.base.model
 
 import androidx.room.Entity
 import java.io.Serializable

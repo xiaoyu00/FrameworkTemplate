@@ -1,22 +1,24 @@
-package com.framework.base.simple
+package com.framework.template.simple
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.framework.base.R
 import com.framework.base.adapter.DataRecyclerAdapter
 import com.framework.base.data.DataManager
-import com.framework.base.data.UserInfo
-import com.framework.base.databinding.ActivityListBinding
-import com.framework.base.databinding.ItemSimpleListBinding
-import com.framework.base.parent.BaseBindingActivity
+import com.framework.base.model.UserInfo
+import com.framework.base.parent.basics.BaseBindingActivity
 import com.framework.base.utils.CommonUtils
 import com.framework.base.utils.DateUtils
+import com.framework.template.R
+import com.framework.template.databinding.ActivityListBinding
+import com.framework.template.databinding.ItemSimpleListBinding
 
-class ListActivity : BaseBindingActivity<ActivityListBinding>() {
+/**
+ * 列表数据刷新（RecyclerView）
+ */
+class DataListActivity : BaseBindingActivity<ActivityListBinding>() {
 
     override fun contextViewId(): Int = R.layout.activity_list
 

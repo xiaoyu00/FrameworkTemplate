@@ -1,13 +1,19 @@
 package com.framework.base.utils
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.KeyguardManager
 import android.content.Context
+import android.content.Context.TELEPHONY_SERVICE
 import android.os.Build
 import android.os.PowerManager
 import android.telephony.TelephonyManager
 import java.util.*
+import android.content.Context.TELEPHONY_SERVICE
+
+import androidx.core.content.ContextCompat.getSystemService
 
 
 /**
@@ -75,6 +81,7 @@ object DeviceUtil {
             tm.deviceId
         }
     }
+
     fun isAppRunningForeground(context: Context): Boolean {
         val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val runningAppProcessInfos = activityManager.runningAppProcesses ?: return false
@@ -88,6 +95,7 @@ object DeviceUtil {
         }
         return false
     }
+
     /**
      * 唤醒手机屏幕并解锁
      */
@@ -95,7 +103,7 @@ object DeviceUtil {
         //获取电源管理器对象
         val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
 
-        if(!pm.isInteractive) {
+        if (!pm.isInteractive) {
             //获取PowerManager.WakeLock对象，后面的参数|表示同时传入两个值，最后的是调试用的Tag
             val wl = pm.newWakeLock(
                 PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.SCREEN_BRIGHT_WAKE_LOCK,
@@ -113,4 +121,22 @@ object DeviceUtil {
         //解锁
         kl.disableKeyguard()
     }
+
+    @SuppressLint("HardwareIds")
+    fun getDeviceId(context: Context): String? {
+        val deviceId: String?
+        val telephonyMgr = context.getSystemService(TELEPHONY_SERVICE) as TelephonyManager?
+        deviceId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (telephonyMgr?.imei == null) {
+                telephonyMgr?.meid
+            } else {
+                telephonyMgr.imei
+            }
+
+        } else {
+            telephonyMgr?.deviceId
+        }
+        return deviceId
+    }
+
 }

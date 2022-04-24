@@ -6,6 +6,7 @@ import androidx.fragment.app.createViewModelLazy
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import com.framework.base.parent.basics.BaseBindingFragment
 import kotlin.reflect.KClass
 
 /**

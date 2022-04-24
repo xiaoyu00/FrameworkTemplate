@@ -1,4 +1,4 @@
-package com.framework.base.parent
+package com.framework.base.parent.basics
 
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding

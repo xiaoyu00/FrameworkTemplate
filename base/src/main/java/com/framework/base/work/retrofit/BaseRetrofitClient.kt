@@ -1,7 +1,6 @@
 package com.framework.base.work.retrofit
 
 import androidx.viewbinding.BuildConfig
-import com.framework.base.data.UserInfo
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -18,16 +17,6 @@ abstract class BaseRetrofitClient {
             .addInterceptor(getHttpLoggingInterceptor())
             .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
         handleBuilder(builder)
-//        builder.addInterceptor {
-//            val request = it.request().newBuilder().apply {
-//                addHeader(
-//                    "token",
-//                    if (UserInfo.user == null || UserInfo.user?.token.isNullOrEmpty()) "" else UserInfo.user!!.token!!
-//                )
-//                addHeader("appmac", CommonUtil.getDeviceUniqueId())
-//            }.build()
-//            it.proceed(request)
-//        }
         builder.build()
     }
     private fun getHttpLoggingInterceptor(): HttpLoggingInterceptor {

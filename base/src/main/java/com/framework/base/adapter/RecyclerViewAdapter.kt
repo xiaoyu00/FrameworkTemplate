@@ -1,13 +1,12 @@
 package com.framework.base.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.framework.base.data.UserInfo
+import com.framework.base.model.UserInfo
 
 class RecyclerViewAdapter(
     private val activity: FragmentActivity,

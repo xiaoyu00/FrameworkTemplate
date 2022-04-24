@@ -1,8 +1,8 @@
-package com.framework.base.simple
+package com.framework.template.simple
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.framework.base.R
+import com.framework.template.R
 
 /**
  * textView 跑马灯效果

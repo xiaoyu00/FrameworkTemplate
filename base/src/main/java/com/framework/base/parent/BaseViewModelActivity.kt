@@ -5,6 +5,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
+import com.framework.base.parent.basics.BaseBindingActivity
 import kotlin.reflect.KClass
 
 /**

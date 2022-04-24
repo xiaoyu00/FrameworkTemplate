@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_camera_album.xml" value="0.1272644927536232" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_list.xml" value="0.1272644927536232" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_main.xml" value="0.11" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_permssion.xml" value="0.1272644927536232" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_scroll_text.xml" value="0.13269927536231885" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/fragment_work_loading.xml" value="0.13269927536231885" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/item_simple_list.xml" value="0.13269927536231885" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/item_simple_text_banner.xml" value="0.13269927536231885" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/backgroud_spinner.xml" value="0.25729166666666664" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/ic_cancel_24.xml" value="0.14427083333333332" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/shape_bg_white_6dp.xml" value="0.25729166666666664" />
@@ -33,6 +40,7 @@
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/flowcamera/src/main/res/layout/flow_camera_view.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/mediaselect/src/main/res/drawable/shape_round_all.xml" value="0.14166666666666666" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/mediaselect/src/main/res/layout/activity_take_camera.xml" value="0.14270833333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/mediaselect/src/main/res/layout/dialog_select.xml" value="0.15" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/selector/src/main/res/drawable/ic_camera.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/selector/src/main/res/layout/activity_take_camera.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/selector/src/main/res/layout/flow_camera_view.xml" value="0.1" />

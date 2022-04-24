@@ -1,6 +1,7 @@
 package com.framework.base.data
 
 import androidx.room.TypeConverter
+import com.framework.base.model.Picture
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

@@ -3,10 +3,8 @@ package com.framework.template
 import android.Manifest
 import android.content.Intent
 import com.framework.base.parent.BaseViewModelActivity
-import com.framework.base.simple.ListActivity
-import com.framework.mediaselect.AlbumManager
-import com.framework.mediaselect.AlbumOperation
 import com.framework.template.databinding.ActivityMainBinding
+import com.framework.template.simple.*
 
 class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>() {
     var permissions = arrayOf(
@@ -18,13 +16,26 @@ class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>
 
     override fun contextViewId() = R.layout.activity_main
     override fun initialize() {
-        dataBinding.tvHello.setOnClickListener {
-//            startActivity(Intent(this, WorkLoadingFragmentActivity::class.java))
-//            startActivity(Intent(this, WorkLoadingActivity::class.java))
-            startActivity(Intent(this, ListActivity::class.java))
-//            AlbumManager.openCamera(this, AlbumOperation()){
-//
-//            }
+        dataBinding.dataList.setOnClickListener {
+            startActivity(Intent(this, DataListActivity::class.java))
+        }
+        dataBinding.dataLoadingFa.setOnClickListener {
+            startActivity(Intent(this, WorkLoadingFragmentActivity::class.java))
+        }
+        dataBinding.dataLoadingA.setOnClickListener {
+            startActivity(Intent(this, WorkLoadingActivity::class.java))
+        }
+        dataBinding.openCamera.setOnClickListener {
+            startActivity(Intent(this, CameraAlbumActivity::class.java))
+        }
+        dataBinding.permissionsCheck.setOnClickListener {
+            startActivity(Intent(this, PermissionActivity::class.java))
+        }
+        dataBinding.textHorse.setOnClickListener {
+            startActivity(Intent(this, ScrollTextActivity::class.java))
+        }
+        dataBinding.textBanner.setOnClickListener {
+            startActivity(Intent(this, TextBannerActivity::class.java))
         }
     }
 

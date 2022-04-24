@@ -1,6 +1,7 @@
 package com.framework.base.data
 
 import androidx.room.*
+import com.framework.base.model.UserInfo
 
 
 @Dao

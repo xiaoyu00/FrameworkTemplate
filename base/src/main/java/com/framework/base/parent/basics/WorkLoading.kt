@@ -1,4 +1,4 @@
-package com.framework.base.parent
+package com.framework.base.parent.basics
 
 import android.content.Context
 import android.view.View

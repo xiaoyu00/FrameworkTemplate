@@ -1,7 +1,6 @@
 package com.framework.base.work.retrofit
 
-import com.framework.base.data.UserInfo
-import okhttp3.MultipartBody
+import com.framework.base.model.UserInfo
 import retrofit2.Call
 import retrofit2.http.*
 

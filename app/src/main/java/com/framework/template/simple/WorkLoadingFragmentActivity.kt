@@ -1,8 +1,8 @@
-package com.framework.base.simple
+package com.framework.template.simple
 
-import com.framework.base.R
-import com.framework.base.databinding.ActivityWorkLoadingFragmentBinding
-import com.framework.base.parent.BaseBindingActivity
+import com.framework.base.parent.basics.BaseBindingActivity
+import com.framework.template.R
+import com.framework.template.databinding.ActivityWorkLoadingFragmentBinding
 
 class WorkLoadingFragmentActivity : BaseBindingActivity<ActivityWorkLoadingFragmentBinding>() {
     override fun contextViewId(): Int = R.layout.activity_work_loading_fragment

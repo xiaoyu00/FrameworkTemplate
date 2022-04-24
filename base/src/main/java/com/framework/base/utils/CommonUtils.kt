@@ -24,7 +24,7 @@ object CommonUtils {
         lastTimeStamp = time
         return valid
     }
-
+    // 复制
     fun copyString(context: Context, value: String) {
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clipData = ClipData.newPlainText(value, value)

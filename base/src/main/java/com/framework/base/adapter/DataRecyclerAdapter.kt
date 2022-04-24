@@ -18,7 +18,6 @@ abstract class DataRecyclerAdapter<D:Any,VH : RecyclerView.ViewHolder>(private v
     abstract fun initDataSource()
     private fun initNotifyChange() {
         dataListLiveData.observe(activity, {
-            Log.e("ssss", "sss::" )
             val isCollection = it.content is Collection<*>
             when (it.type) {
                 NotifyType.ADD -> {

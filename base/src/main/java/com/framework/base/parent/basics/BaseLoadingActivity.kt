@@ -1,28 +1,24 @@
-package com.framework.base.parent
+package com.framework.base.parent.basics
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.framework.base.views.loading.BaseLoadingDialog
 import com.framework.base.views.loading.BaseWorkView
 import com.framework.base.views.loading.DefaultLoadingDialog
 import com.framework.base.views.loading.DefaultWorkView
 
 /**
- * Fragment 基类
+ * Activity 基类
  */
-abstract class BaseLoadingFragment : BaseFragment(), WorkLoading {
-
+abstract class BaseLoadingActivity : BaseActivity(), WorkLoading {
     private lateinit var uploadLoading: BaseLoadingDialog
     private lateinit var workView: BaseWorkView
 
-    override fun initBase(inflater: LayoutInflater, container: ViewGroup?): View {
+    override fun initBase() {
         val contentView = layoutInflater.inflate(contextViewId(), null)
-        initLoading(requireContext(), contentView) {
+        initLoading(this, contentView) {
             onLoadErrorClickListener()
         }
-        return workView
     }
 
     override fun initLoading(
@@ -33,6 +29,7 @@ abstract class BaseLoadingFragment : BaseFragment(), WorkLoading {
         uploadLoading = createUploadLoadingDialog(context) ?: createDefaultLoadingDialog(context)
         workView = createWorkLoadingView(context, contentView, onLoadErrorClickListener)
             ?: createDefaultWorkLoadingView(context, contentView, onLoadErrorClickListener)
+        setContentView(workView)
     }
 
     open fun onLoadErrorClickListener() {
@@ -51,7 +48,6 @@ abstract class BaseLoadingFragment : BaseFragment(), WorkLoading {
         workView.workFinish()
     }
 
-    fun getWorkView(): View = workView
     override fun showUploadLoading(loadingTips: String) {
         uploadLoading.show(loadingTips)
     }
@@ -87,4 +83,5 @@ abstract class BaseLoadingFragment : BaseFragment(), WorkLoading {
     override fun createDefaultLoadingDialog(context: Context): BaseLoadingDialog {
         return DefaultLoadingDialog(context)
     }
+
 }
