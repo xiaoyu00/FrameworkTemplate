@@ -36,6 +36,9 @@ import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 import top.zibin.luban.OnRenameListener;
 
+/**
+ *  多媒体拍摄选择压缩（图片视频）
+ */
 public class AlbumManager {
 
     public static void showSelectDialog(Context context, AlbumOperation operation, PathBackCall callback) {
