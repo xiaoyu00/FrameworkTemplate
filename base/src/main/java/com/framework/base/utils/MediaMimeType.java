@@ -9,7 +9,7 @@ import android.text.TextUtils;
  * @describe：PictureMimeType
  */
 
-public final class PictureMimeType {
+public final class MediaMimeType {
 
 
     /**

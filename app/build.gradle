@@ -31,6 +31,14 @@ android {
 //            storePassword 'mc2021'
 //        }
     }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def releaseTime = new Date().format("MMdd", TimeZone.getDefault())
+            if ("release" == variant.buildType.name) {
+                outputFileName = "夜陌${versionName}_${releaseTime}.apk"
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false

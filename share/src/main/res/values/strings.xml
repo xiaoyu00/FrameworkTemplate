@@ -1,0 +1,8 @@
+<resources>
+    <string name="name_share_to">分享到</string>
+    <string name="name_weichat_friends_circle">朋友圈</string>
+    <string name="name_weichat_friends">微信好友</string>
+    <string name="name_qq_zone">QQ空间</string>
+    <string name="name_qq_friends">QQ好友</string>
+
+</resources>

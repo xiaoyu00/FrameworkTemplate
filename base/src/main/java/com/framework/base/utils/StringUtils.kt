@@ -41,16 +41,4 @@ object StringUtils {
             .map { allowedChars.random() }
             .joinToString("")
     }
-
-    fun base64ToBitmap(base64String: String?): Bitmap? {
-        var bitmap: Bitmap? = null
-        try {
-            val bitmapArray: ByteArray = Base64.decode(base64String, Base64.DEFAULT)
-            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.size)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return bitmap
-    }
-
 }

@@ -44,24 +44,6 @@ public class FileUtil {
         return storagePath;
     }
 
-    public static String saveBitmap(String dir, Bitmap b) {
-        DST_FOLDER_NAME = dir;
-        String path = initPath();
-        long dataTake = System.currentTimeMillis();
-        String jpegName = path + File.separator + "picture_" + dataTake + ".jpg";
-        try {
-            FileOutputStream fout = new FileOutputStream(jpegName);
-            BufferedOutputStream bos = new BufferedOutputStream(fout);
-            b.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
-            return jpegName;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
     public static boolean deleteFile(String url) {
         boolean result = false;
         File file = new File(url);
