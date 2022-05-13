@@ -3,6 +3,7 @@ package com.framework.template
 import android.Manifest
 import android.content.Intent
 import com.framework.base.parent.BaseViewModelActivity
+import com.framework.share.ShareManager
 import com.framework.template.databinding.ActivityMainBinding
 import com.framework.template.simple.*
 
@@ -36,6 +37,9 @@ class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>
         }
         dataBinding.textBanner.setOnClickListener {
             startActivity(Intent(this, TextBannerActivity::class.java))
+        }
+        dataBinding.weekUp.setOnClickListener {
+            startActivity(Intent(this, WeekUpScreenActivity::class.java))
         }
     }
 

@@ -42,26 +42,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="数据加载Activity" />
+
             <Button
                 android:id="@+id/open_camera"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="相册" />
+
             <Button
                 android:id="@+id/permissions_check"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="权限检测" />
+
             <Button
                 android:id="@+id/text_horse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="textView跑马灯效果" />
+
             <Button
                 android:id="@+id/text_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="text轮播" />
+
+            <Button
+                android:id="@+id/week_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="锁屏唤醒" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -22,6 +22,7 @@
                 android:textSize="20sp" />
 
             <ImageView
+                android:id="@+id/image_cancel"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
@@ -31,7 +32,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.6dp"
+            android:layout_height="0.3dp"
             android:background="@color/grey" />
 
         <LinearLayout
@@ -41,6 +42,7 @@
             android:padding="16dp">
 
             <LinearLayout
+                android:id="@+id/weichat_friends"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -61,6 +63,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/weichat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -81,6 +84,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/qq_zone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -101,6 +105,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/qq_friends"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

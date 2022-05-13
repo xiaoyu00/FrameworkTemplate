@@ -80,6 +80,7 @@ dependencies {
     // alternatively, just LiveData
     implementation "android.arch.lifecycle:livedata:1.1.1"
     implementation project(path: ':base')
+    implementation project(path: ':share')
     implementation project(path: ':mediaselect')
     // 须iava 8支持
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"

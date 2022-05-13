@@ -1,10 +1,16 @@
 package com.framework.share
 
+import android.app.Dialog
 import android.content.Context
+import android.view.Gravity
+import android.view.LayoutInflater
 import com.framework.share.core.ShareCallBack
 import com.framework.share.core.ShareData
+import com.framework.share.databinding.LayoutSharePopBinding
 import com.framework.share.platform.SystemShare
 import com.framework.share.platform.WechatShare
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
 
 object ShareManager {
     private val wechatShare = WechatShare()
@@ -47,7 +53,27 @@ object ShareManager {
 
     }
 
-    fun showSharePop(context: Context) {
+    fun showSharePop(context: Context, shareData: ShareData) {
+        val bDialog = BottomSheetDialog(context)
+        val binding = LayoutSharePopBinding.inflate(LayoutInflater.from(context))
+        binding.imageCancel.setOnClickListener {
+            if (bDialog.isShowing) {
+                bDialog.dismiss()
+            }
+        }
+        binding.weichatFriends.setOnClickListener {
+            wechatShare.shareCheck(SendMessageToWX.Req.WXSceneTimeline, shareData)
+        }
+        binding.weichat.setOnClickListener {
+//            wechatShare.shareCheck()
+        }
+        binding.qqZone.setOnClickListener {
 
+        }
+        binding.qqFriends.setOnClickListener {
+
+        }
+        bDialog.setContentView(binding.root)
+        bDialog.show()
     }
 }

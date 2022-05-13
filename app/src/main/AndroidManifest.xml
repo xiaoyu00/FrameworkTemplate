@@ -47,6 +47,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".simple.DataListActivity"/>
+        <activity android:name=".simple.CameraAlbumActivity"/>
+        <activity android:name=".simple.PermissionActivity"/>
+        <activity android:name=".simple.ScrollTextActivity"/>
+        <activity android:name=".simple.TextBannerActivity"/>
+        <activity android:name=".simple.WeekUpScreenActivity"/>
+        <activity android:name=".simple.WorkLoadingActivity"/>
+        <activity android:name=".simple.WorkLoadingFragmentActivity"/>
     </application>
 
 </manifest>
