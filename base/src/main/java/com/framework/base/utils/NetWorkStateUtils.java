@@ -21,9 +21,14 @@ import javax.crypto.spec.SecretKeySpec;
  * 网络状态
  */
 public class NetWorkStateUtils {
+    //网络类型
     public static final int TYPE_WIFI = 1;
     public static final int TYPE_MOBILE = 2;
     public static final int TYPE_NOT_CONNECTED = 0;
+
+    public static final int TYPE_STATE_AVAILABLE = 0;
+    public static final int TYPE_STATE_UNAVAILABLE = 1;
+    public static final int TYPE_STATE_LOST = 2;
 
     public static int getConnectivityStatus(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
@@ -43,25 +48,26 @@ public class NetWorkStateUtils {
     /**
      * 新的方式
      */
-    public static void netConnectivity(Context context){
+    public static void getNetConnectivity(Context context, ConnectivityManager.NetworkCallback networkCallback) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        connectivityManager.registerNetworkCallback(new NetworkRequest.Builder().build(), new ConnectivityManager.NetworkCallback() {
-            @Override public void onAvailable(Network network) {
-                Log.e("sssss","网络可用");
-                super.onAvailable(network);
-            }
-
-            @Override
-            public void onUnavailable() {
-                Log.e("sssss","网络不可用");
-                super.onUnavailable();
-            }
-
-            @Override
-            public void onLost(@NonNull Network network) {
-                Log.e("sssss","网络lost");
-                super.onLost(network);
-            }
-        });
+        connectivityManager.registerNetworkCallback(new NetworkRequest.Builder().build(), networkCallback);
+//        connectivityManager.registerNetworkCallback(new NetworkRequest.Builder().build(), new ConnectivityManager.NetworkCallback() {
+//            @Override public void onAvailable(Network network) {
+//                Log.e("sssss","网络可用");
+//                super.onAvailable(network);
+//            }
+//
+//            @Override
+//            public void onUnavailable() {
+//                Log.e("sssss","网络不可用");
+//                super.onUnavailable();
+//            }
+//
+//            @Override
+//            public void onLost(@NonNull Network network) {
+//                Log.e("sssss","网络lost");
+//                super.onLost(network);
+//            }
+//        });
     }
 }
