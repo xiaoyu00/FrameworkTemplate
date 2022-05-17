@@ -2,6 +2,7 @@ package com.framework.base.utils;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -65,6 +66,7 @@ public class FileUtil {
         }
         return false;
     }
+
     /**
      * @param context
      * @param chooseMode
@@ -136,6 +138,7 @@ public class FileUtil {
         String newFileImageName = isOutFileNameEmpty ? getCreateFileName("IMG_") + suffix : fileName;
         return new File(folderDir, newFileImageName);
     }
+
     /**
      * 根据时间戳创建文件名
      *
@@ -146,6 +149,7 @@ public class FileUtil {
         long millis = System.currentTimeMillis();
         return prefix + sf.format(millis);
     }
+
     /**
      * 文件根目录
      *
@@ -154,7 +158,7 @@ public class FileUtil {
      * @return
      */
     private static File getRootDirFile(Context context, int type) {
-        if (type ==TYPE_VIDEO) {
+        if (type == TYPE_VIDEO) {
             return context.getExternalFilesDir(Environment.DIRECTORY_MOVIES);
         }
         return context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -212,6 +216,7 @@ public class FileUtil {
             e.printStackTrace();
         }
     }
+
     /**
      * 获取真实路径
      *
@@ -231,6 +236,7 @@ public class FileUtil {
                 return new File(uri.getPath()).getAbsolutePath();
         }
     }
+
     /**
      * 从uri获取path
      *
@@ -261,6 +267,7 @@ public class FileUtil {
         }
         return path;
     }
+
     /**
      * 用流拷贝文件一份到自己APP私有目录下
      *
@@ -321,4 +328,20 @@ public class FileUtil {
         return targetFile;
     }
 
+    //普通安装
+    public static void installApk(Context context, File apkFile) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        //版本在7.0以上是不能直接通过uri访问的
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            // 由于没有在Activity环境下启动Activity,设置下面的标签
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri apkUri = FileProvider.getUriForFile(context.getApplicationContext(), context.getPackageName() + ".fileProvider", apkFile);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setDataAndType(Uri.fromFile(apkFile),
+                    "application/vnd.android.package-archive");
+        }
+        context.startActivity(intent);
+    }
 }
