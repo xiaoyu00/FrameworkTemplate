@@ -13,8 +13,6 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 
     private ConnectivityManager.NetworkCallback networkCallback;
 
-    private MediaPlayer mediaPlayer;
-
     @Override
     public void onReceive(Context context, Intent intent) {
         if (ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction())) {
@@ -39,8 +37,6 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
      */
     public void unRegisterReceiver(Context context) {
         context.unregisterReceiver(this);
-        mediaPlayer.release();
-        mediaPlayer = null;
     }
 
 }
