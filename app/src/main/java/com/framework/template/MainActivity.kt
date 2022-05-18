@@ -41,6 +41,9 @@ class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>
         dataBinding.weekUp.setOnClickListener {
             startActivity(Intent(this, WeekUpScreenActivity::class.java))
         }
+        dataBinding.expandText.setOnClickListener {
+            startActivity(Intent(this, ExpandableTextActivity::class.java))
+        }
     }
 
     override fun modelClass() = SimpleViewModel::class

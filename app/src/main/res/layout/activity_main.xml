@@ -72,6 +72,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="锁屏唤醒" />
+            <Button
+                android:id="@+id/expand_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="可折叠textview" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

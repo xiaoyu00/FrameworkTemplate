@@ -55,6 +55,7 @@
         <activity android:name=".simple.WeekUpScreenActivity"/>
         <activity android:name=".simple.WorkLoadingActivity"/>
         <activity android:name=".simple.WorkLoadingFragmentActivity"/>
+        <activity android:name=".simple.ExpandableTextActivity"/>
     </application>
 
 </manifest>

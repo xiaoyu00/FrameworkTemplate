@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_camera_album.xml" value="0.1272644927536232" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_expandable_text.xml" value="0.11820652173913043" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_list.xml" value="0.1272644927536232" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_main.xml" value="0.11" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_permssion.xml" value="0.1272644927536232" />
@@ -27,12 +28,14 @@
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/dialog_default_loading.xml" value="0.24114583333333334" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/dialog_progress.xml" value="0.12952898550724637" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/fragment_work_loading.xml" value="0.24114583333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/item_expand_collapse.xml" value="0.11820652173913043" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/item_simple_list.xml" value="0.13541666666666666" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/item_simple_text_banner.xml" value="0.178125" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/layout_error_loading_view.xml" value="0.2" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/layout_loading_view.xml" value="0.11302083333333333" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/layout_progress.xml" value="0.128125" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/layout_progress_item.xml" value="0.12952898550724637" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/more_expand_shrink.xml" value="0.109375" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/camera/src/main/res/drawable/ic_photo.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/camera/src/main/res/layout/activity_take_camera.xml" value="0.10884353741496598" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/camera/src/main/res/layout/camera_view.xml" value="0.1" />
