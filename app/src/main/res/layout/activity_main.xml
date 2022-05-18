@@ -42,6 +42,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="数据加载Activity" />
+            <Button
+                android:id="@+id/shape_loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="自定义shape动画Loading" />
 
             <Button
                 android:id="@+id/open_camera"

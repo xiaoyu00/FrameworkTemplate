@@ -26,6 +26,9 @@ class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>
         dataBinding.dataLoadingA.setOnClickListener {
             startActivity(Intent(this, WorkLoadingActivity::class.java))
         }
+        dataBinding.shapeLoading.setOnClickListener {
+            startActivity(Intent(this, ShapeLoadingActivity::class.java))
+        }
         dataBinding.openCamera.setOnClickListener {
             startActivity(Intent(this, CameraAlbumActivity::class.java))
         }

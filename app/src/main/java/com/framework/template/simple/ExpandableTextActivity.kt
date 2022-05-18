@@ -7,7 +7,7 @@ import com.framework.base.views.expandabletext.MoreLineTextView
 import com.framework.template.R
 
 /**
- * textView 跑马灯效果
+ * 可折叠textView
  */
 class ExpandableTextActivity : AppCompatActivity() {
     val LOG_TAG = "logTag"
@@ -30,7 +30,7 @@ class ExpandableTextActivity : AppCompatActivity() {
         mTvExpandableShort = findViewById(R.id.tv_expandable_short) as ExpandableTextView
         mTvMoreLineLong = findViewById(R.id.tv_more_line_long) as MoreLineTextView
         mTvExpandableLong = findViewById(R.id.tv_expandable_long) as ExpandableTextView
-//        initData()
+        initData()
     }
 
     private fun initData() {

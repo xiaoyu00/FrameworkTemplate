@@ -40,6 +40,7 @@
         android:theme="@style/Theme.FrameworkTemplate"
         android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,10 +53,11 @@
         <activity android:name=".simple.PermissionActivity"/>
         <activity android:name=".simple.ScrollTextActivity"/>
         <activity android:name=".simple.TextBannerActivity"/>
+        <activity android:name=".simple.ExpandableTextActivity"/>
         <activity android:name=".simple.WeekUpScreenActivity"/>
         <activity android:name=".simple.WorkLoadingActivity"/>
         <activity android:name=".simple.WorkLoadingFragmentActivity"/>
-        <activity android:name=".simple.ExpandableTextActivity"/>
+        <activity android:name=".simple.ShapeLoadingActivity"/>
     </application>
 
 </manifest>
