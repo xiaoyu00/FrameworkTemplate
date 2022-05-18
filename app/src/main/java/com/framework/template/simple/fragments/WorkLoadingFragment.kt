@@ -52,7 +52,7 @@ class WorkLoadingFragment : BaseBindingLoadingFragment<FragmentWorkLoadingBindin
 
     override fun initialize() {
         dataBinding.tvContent.setOnClickListener {
-            showUploadLoading("正在加载中。。。")
+            showLoadingDialog("正在加载中。。。")
         }
         showWorkLoading()
 

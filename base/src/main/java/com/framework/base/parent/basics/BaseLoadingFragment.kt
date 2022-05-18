@@ -14,7 +14,7 @@ import com.framework.base.views.loading.DefaultWorkView
  */
 abstract class BaseLoadingFragment : BaseFragment(), WorkLoading {
 
-    private lateinit var uploadLoading: BaseLoadingDialog
+    private lateinit var loadingDialog: BaseLoadingDialog
     private lateinit var workView: BaseWorkView
 
     override fun initBase(inflater: LayoutInflater, container: ViewGroup?): View {
@@ -30,7 +30,7 @@ abstract class BaseLoadingFragment : BaseFragment(), WorkLoading {
         contentView: View,
         onLoadErrorClickListener: (() -> Unit)?
     ) {
-        uploadLoading = createUploadLoadingDialog(context) ?: createDefaultLoadingDialog(context)
+        loadingDialog = createLoadingDialog(context) ?: createDefaultLoadingDialog(context)
         workView = createWorkLoadingView(context, contentView, onLoadErrorClickListener)
             ?: createDefaultWorkLoadingView(context, contentView, onLoadErrorClickListener)
     }
@@ -52,19 +52,19 @@ abstract class BaseLoadingFragment : BaseFragment(), WorkLoading {
     }
 
     fun getWorkView(): View = workView
-    override fun showUploadLoading(loadingTips: String) {
-        uploadLoading.show(loadingTips)
+    override fun showLoadingDialog(loadingTips: String) {
+        loadingDialog.show(loadingTips)
     }
 
-    override fun closeUploadLoading() {
-        uploadLoading.apply {
+    override fun closeLoadingDialog() {
+        loadingDialog.apply {
             if (isShowing) {
                 dismiss()
             }
         }
     }
 
-    override fun createUploadLoadingDialog(context: Context): BaseLoadingDialog? {
+    override fun createLoadingDialog(context: Context): BaseLoadingDialog? {
         return null
     }
 

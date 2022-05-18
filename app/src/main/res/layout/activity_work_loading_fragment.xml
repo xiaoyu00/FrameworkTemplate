@@ -10,12 +10,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/teal_200"
         tools:context=".simple.WorkLoadingActivity">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/tv_content"
-            android:name="com.framework.base.simple.WorkLoadingFragment"
+            android:name="com.framework.template.simple.fragments.WorkLoadingFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="18sp" />

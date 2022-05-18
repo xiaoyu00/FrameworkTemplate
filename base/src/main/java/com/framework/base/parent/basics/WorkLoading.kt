@@ -9,11 +9,11 @@ interface WorkLoading {
 
     fun initLoading(context: Context,contentView: View, onLoadErrorClickListener: (() -> Unit)?)
 
-    fun showUploadLoading(loadingTips: String)
+    fun showLoadingDialog(loadingTips: String)
 
-    fun closeUploadLoading()
+    fun closeLoadingDialog()
 
-    fun createUploadLoadingDialog(context: Context): BaseLoadingDialog?
+    fun createLoadingDialog(context: Context): BaseLoadingDialog?
 
     fun createWorkLoadingView(
         context: Context,

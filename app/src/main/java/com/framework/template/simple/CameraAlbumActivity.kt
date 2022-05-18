@@ -11,10 +11,6 @@ import com.framework.template.databinding.ActivityCameraAlbumBinding
  * 拍摄 相册（fragment 通用）
  */
 class CameraAlbumActivity : BaseBindingActivity<ActivityCameraAlbumBinding>() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scroll_text)
-    }
 
     override fun contextViewId(): Int = R.layout.activity_camera_album
 

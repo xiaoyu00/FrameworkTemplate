@@ -26,7 +26,7 @@ abstract class BaseLoadingActivity : BaseActivity(), WorkLoading {
         contentView: View,
         onLoadErrorClickListener: (() -> Unit)?
     ) {
-        uploadLoading = createUploadLoadingDialog(context) ?: createDefaultLoadingDialog(context)
+        uploadLoading = createLoadingDialog(context) ?: createDefaultLoadingDialog(context)
         workView = createWorkLoadingView(context, contentView, onLoadErrorClickListener)
             ?: createDefaultWorkLoadingView(context, contentView, onLoadErrorClickListener)
         setContentView(workView)
@@ -48,11 +48,11 @@ abstract class BaseLoadingActivity : BaseActivity(), WorkLoading {
         workView.workFinish()
     }
 
-    override fun showUploadLoading(loadingTips: String) {
+    override fun showLoadingDialog(loadingTips: String) {
         uploadLoading.show(loadingTips)
     }
 
-    override fun closeUploadLoading() {
+    override fun closeLoadingDialog() {
         uploadLoading.apply {
             if (isShowing) {
                 dismiss()
@@ -60,7 +60,7 @@ abstract class BaseLoadingActivity : BaseActivity(), WorkLoading {
         }
     }
 
-    override fun createUploadLoadingDialog(context: Context): BaseLoadingDialog? {
+    override fun createLoadingDialog(context: Context): BaseLoadingDialog? {
         return null
     }
 
