@@ -1,4 +1,4 @@
-package com.framework.template.simple
+package com.framework.template.simple.fragments
 
 import android.os.Bundle
 import android.os.Handler

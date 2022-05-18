@@ -82,6 +82,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="可折叠textview" />
+            <Button
+                android:id="@+id/btn_nav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="底部导航栏" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

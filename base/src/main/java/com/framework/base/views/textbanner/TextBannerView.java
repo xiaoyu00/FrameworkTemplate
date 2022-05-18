@@ -1,204 +1,359 @@
 package com.framework.base.views.textbanner;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+import androidx.annotation.AnimRes;
 
 import com.framework.base.R;
+import com.framework.base.utils.DensityUtils;
 
-public class TextBannerView extends LinearLayout implements BaseBannerAdapter.OnDataChangedListener {
-    private float mBannerHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
-    private int mGap = 4000;
-    private int mAnimDuration = 1000;
+import java.util.List;
 
-    private BaseBannerAdapter mAdapter;
+/**
+ * @author luoweichao
+ * @描述 文字自动轮播（跑马灯）
+ * @email superluo666@gmail.com
+ * @date 2018/3/28/028 21:21
+ */
+public class TextBannerView extends RelativeLayout {
+    private ViewFlipper mViewFlipper;
+    private int mInterval = 3000;
+    /**
+     * 文字切换时间间隔,默认3s
+     */
+    private boolean isSingleLine = false;
+    /**
+     * 文字是否为单行,默认false
+     */
+    private int mTextColor = 0xff000000;
+    /**
+     * 设置文字颜色,默认黑色
+     */
+    private int mTextSize = 16;
+    /**
+     * 设置文字尺寸,默认16px
+     */
+    private int mGravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
+    /**
+     * 文字显示位置,默认左边居中
+     */
+    private static final int GRAVITY_LEFT = 0;
+    private static final int GRAVITY_CENTER = 1;
+    private static final int GRAVITY_RIGHT = 2;
 
-    private View mFirstView;
-    private View mSecondView;
+    private boolean hasSetDirection = false;
+    private int direction = DIRECTION_BOTTOM_TO_TOP;
+    private static final int DIRECTION_BOTTOM_TO_TOP = 0;
+    private static final int DIRECTION_TOP_TO_BOTTOM = 1;
+    private static final int DIRECTION_RIGHT_TO_LEFT = 2;
+    private static final int DIRECTION_LEFT_TO_RIGHT = 3;
+    @AnimRes
+    private int inAnimResId = R.anim.anim_right_in;
+    @AnimRes
+    private int outAnimResId = R.anim.anim_left_out;
+    private boolean hasSetAnimDuration = false;
+    private int animDuration = 1500;
+    /**
+     * 默认1.5s
+     */
+    private int mFlags = -1;
+    /**
+     * 文字划线
+     */
+    private static final int STRIKE = 0;
+    private static final int UNDER_LINE = 1;
+    private int mTypeface = Typeface.NORMAL;
+    /**
+     * 设置字体类型：加粗、斜体、斜体加粗
+     */
+    private static final int TYPE_NORMAL = 0;
+    private static final int TYPE_BOLD = 1;
+    private static final int TYPE_ITALIC = 2;
+    private static final int TYPE_ITALIC_BOLD = 3;
 
-    private int mPosition;
-
+    private List<String> mDatas;
+    private ITextBannerItemClickListener mListener;
     private boolean isStarted;
-    private Paint mDebugPaint;
+    private boolean isDetachedFromWindow;
+
 
     public TextBannerView(Context context) {
         this(context, null);
     }
 
     public TextBannerView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        init(context, attrs, 0);
     }
-
-    public TextBannerView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(context, attrs, defStyleAttr);
-    }
-
 
     /**
-     * bannerHeight banner的高度
-     * animDuration 每次切换动画时间
-     * gap banner切换时间
+     * 初始化控件
      */
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        setOrientation(VERTICAL);
-        mDebugPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TextBannerView);
-        mGap = array.getInteger(R.styleable.TextBannerView_gap, mGap);
-        mAnimDuration = array.getInteger(R.styleable.TextBannerView_animDuration, mAnimDuration);
-
-        if (mGap <= mAnimDuration) {
-            mGap = 4000;
-            mAnimDuration = 1000;
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TextBannerViewStyle, defStyleAttr, 0);
+        mInterval = typedArray.getInteger(R.styleable.TextBannerViewStyle_setInterval, mInterval);//文字切换时间间隔
+        isSingleLine = typedArray.getBoolean(R.styleable.TextBannerViewStyle_setSingleLine, false);//文字是否为单行
+        mTextColor = typedArray.getColor(R.styleable.TextBannerViewStyle_setTextColor, mTextColor);//设置文字颜色
+        if (typedArray.hasValue(R.styleable.TextBannerViewStyle_setTextSize)) {//设置文字尺寸
+            mTextSize = (int) typedArray.getDimension(R.styleable.TextBannerViewStyle_setTextSize, mTextSize);
+            mTextSize = DensityUtils.INSTANCE.px2sp(context, mTextSize);
+        }
+        int gravityType = typedArray.getInt(R.styleable.TextBannerViewStyle_setGravity, GRAVITY_LEFT);//显示位置
+        switch (gravityType) {
+            case GRAVITY_LEFT:
+                mGravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
+                break;
+            case GRAVITY_CENTER:
+                mGravity = Gravity.CENTER;
+                break;
+            case GRAVITY_RIGHT:
+                mGravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+                break;
+        }
+        hasSetAnimDuration = typedArray.hasValue(R.styleable.TextBannerViewStyle_setAnimDuration);
+        animDuration = typedArray.getInt(R.styleable.TextBannerViewStyle_setAnimDuration, animDuration);//动画时间
+        hasSetDirection = typedArray.hasValue(R.styleable.TextBannerViewStyle_setDirection);
+        direction = typedArray.getInt(R.styleable.TextBannerViewStyle_setDirection, direction);//方向
+        if (hasSetDirection) {
+            switch (direction) {
+                case DIRECTION_BOTTOM_TO_TOP:
+                    inAnimResId = R.anim.anim_bottom_in;
+                    outAnimResId = R.anim.anim_top_out;
+                    break;
+                case DIRECTION_TOP_TO_BOTTOM:
+                    inAnimResId = R.anim.anim_top_in;
+                    outAnimResId = R.anim.anim_bottom_out;
+                    break;
+                case DIRECTION_RIGHT_TO_LEFT:
+                    inAnimResId = R.anim.anim_right_in;
+                    outAnimResId = R.anim.anim_left_out;
+                    break;
+                case DIRECTION_LEFT_TO_RIGHT:
+                    inAnimResId = R.anim.anim_left_in;
+                    outAnimResId = R.anim.anim_right_out;
+                    break;
+            }
+        } else {
+            inAnimResId = R.anim.anim_right_in;
+            outAnimResId = R.anim.anim_left_out;
+        }
+        mFlags = typedArray.getInt(R.styleable.TextBannerViewStyle_setFlags, mFlags);//字体划线
+        switch (mFlags) {
+            case STRIKE:
+                mFlags = Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG;
+                break;
+            case UNDER_LINE:
+                mFlags = Paint.UNDERLINE_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG;
+                break;
+            default:
+                mFlags = 0 | Paint.ANTI_ALIAS_FLAG;
+                break;
+        }
+        mTypeface = typedArray.getInt(R.styleable.TextBannerViewStyle_setTypeface, mTypeface);//字体样式
+        switch (mTypeface) {
+            case TYPE_BOLD:
+                mTypeface = Typeface.BOLD;
+                break;
+            case TYPE_ITALIC:
+                mTypeface = Typeface.ITALIC;
+                break;
+            case TYPE_ITALIC_BOLD:
+                mTypeface = Typeface.ITALIC | Typeface.BOLD;
+                break;
+            default:
+                break;
         }
 
-        array.recycle();
+
+        mViewFlipper = new ViewFlipper(getContext());//new 一个ViewAnimator
+        mViewFlipper.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        addView(mViewFlipper);
+        startViewAnimator();
+        //设置点击事件
+        mViewFlipper.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = mViewFlipper.getDisplayedChild();//当前显示的子视图的索引位置
+                if (mListener != null) {
+                    mListener.onItemClick(mDatas.get(position), position);
+                }
+            }
+        });
+
     }
 
     /**
-     * 设置banner的数据
+     * 暂停动画
      */
-    public void setAdapter(BaseBannerAdapter adapter) {
-        if (adapter == null) {
-            throw new RuntimeException("adapter must not be null");
-        }
-        if (mAdapter != null) {
-            throw new RuntimeException("you have already set an Adapter");
-        }
-        this.mAdapter = adapter;
-        mAdapter.setOnDataChangedListener(this);
-        setupAdapter();
-    }
-
-    public void start() {
-        if (mAdapter == null) {
-            throw new RuntimeException("you must call setAdapter() before start");
-        }
-
-        if (!isStarted && mAdapter.getCount() > 1) {
-            isStarted = true;
-            postDelayed(mRunnable, mGap);
-        }
-    }
-
-    public void stop() {
-        removeCallbacks(mRunnable);
-        isStarted = false;
-    }
-
-
-    private void setupAdapter() {
-        removeAllViews();
-
-        if (mAdapter.getCount() == 1) {
-            mFirstView = mAdapter.getView(this);
-            mAdapter.setItem(mFirstView, mAdapter.getItem(0));
-            addView(mFirstView);
-        } else {
-            mFirstView = mAdapter.getView(this);
-            mSecondView = mAdapter.getView(this);
-            mAdapter.setItem(mFirstView, mAdapter.getItem(0));
-            mAdapter.setItem(mSecondView, mAdapter.getItem(1));
-            addView(mFirstView);
-            addView(mSecondView);
-
-            mPosition = 1;
+    public void stopViewAnimator() {
+        if (isStarted) {
+            removeCallbacks(mRunnable);
             isStarted = false;
         }
-        setBackgroundDrawable(mFirstView.getBackground());
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        if (LayoutParams.WRAP_CONTENT == getLayoutParams().height) {
-            getLayoutParams().height = (int) mBannerHeight;
-        } else {
-            mBannerHeight = getHeight();
-        }
-        if (isInEditMode()) {
-            setBackgroundColor(Color.GRAY);
-            return;
-        }
-        if (mFirstView != null) {
-            mFirstView.getLayoutParams().height = (int) mBannerHeight;
-        }
-        if (mSecondView != null) {
-            mSecondView.getLayoutParams().height = (int) mBannerHeight;
-        }
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        if (isInEditMode()) {
-            mDebugPaint.setColor(Color.WHITE);
-            mDebugPaint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
-            mDebugPaint.setStyle(Paint.Style.STROKE);
-            canvas.drawText("banner is here", 20, getHeight() * 2 / 3, mDebugPaint);
-        }
-    }
-
-    @Override
-    public void onChanged() {
-        setupAdapter();
-    }
-
-
-    private void performSwitch() {
-        ObjectAnimator animator1 = ObjectAnimator.ofFloat(mFirstView, "translationY", mFirstView.getTranslationY() - mBannerHeight);
-        ObjectAnimator animator2 = ObjectAnimator.ofFloat(mSecondView, "translationY", mSecondView.getTranslationY() - mBannerHeight);
-        AnimatorSet set = new AnimatorSet();
-        set.playTogether(animator1, animator2);
-        set.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mFirstView.setTranslationY(0);
-                mSecondView.setTranslationY(0);
-                View removedView = getChildAt(0);
-                mPosition++;
-                mAdapter.setItem(removedView, mAdapter.getItem(mPosition % mAdapter.getCount()));
-                removeView(removedView);
-                addView(removedView, 1);
+    /**
+     * 开始动画
+     */
+    public void startViewAnimator() {
+        if (!isStarted) {
+            if (!isDetachedFromWindow) {
+                isStarted = true;
+                postDelayed(mRunnable, mInterval);
             }
-
-        });
-        set.setDuration(mAnimDuration);
-        set.start();
+        }
     }
 
+    /**
+     * 设置延时间隔
+     */
     private AnimRunnable mRunnable = new AnimRunnable();
 
     private class AnimRunnable implements Runnable {
 
         @Override
         public void run() {
-            performSwitch();
-            postDelayed(this, mGap);
+            if (isStarted) {
+                setInAndOutAnimation(inAnimResId, outAnimResId);
+                mViewFlipper.showNext();//手动显示下一个子view。
+                postDelayed(this, mInterval + animDuration);
+            } else {
+                stopViewAnimator();
+            }
+
         }
+    }
+
+
+    /**
+     * 设置进入动画和离开动画
+     *
+     * @param inAnimResId  进入动画的resID
+     * @param outAnimResID 离开动画的resID
+     */
+    private void setInAndOutAnimation(@AnimRes int inAnimResId, @AnimRes int outAnimResID) {
+        Animation inAnim = AnimationUtils.loadAnimation(getContext(), inAnimResId);
+        inAnim.setDuration(animDuration);
+        mViewFlipper.setInAnimation(inAnim);
+
+        Animation outAnim = AnimationUtils.loadAnimation(getContext(), outAnimResID);
+        outAnim.setDuration(animDuration);
+        mViewFlipper.setOutAnimation(outAnim);
+    }
+
+
+    /**
+     * 设置数据集合
+     */
+    public void setDatas(List<String> datas) {
+        this.mDatas = datas;
+        if (!mDatas.isEmpty()) {
+            mViewFlipper.removeAllViews();
+            for (int i = 0; i < mDatas.size(); i++) {
+                TextView textView = new TextView(getContext());
+                setTextView(textView, i);
+
+                mViewFlipper.addView(textView, i);//添加子view,并标识子view位置
+            }
+        }
+
+    }
+
+    /**
+     * 设置数据集合伴随drawable-icon
+     *
+     * @param datas     数据
+     * @param drawable  图标
+     * @param size      图标尺寸
+     * @param direction 图标位于文字方位
+     */
+    public void setDatasWithDrawableIcon(List<String> datas, Drawable drawable, int size, int direction) {
+        this.mDatas = datas;
+        if (mDatas.isEmpty()) {
+            return;
+        }
+        mViewFlipper.removeAllViews();
+        for (int i = 0; i < mDatas.size(); i++) {
+            TextView textView = new TextView(getContext());
+            setTextView(textView, i);
+
+            textView.setCompoundDrawablePadding(8);
+            float scale = getResources().getDisplayMetrics().density;// 屏幕密度 ;
+            int muchDp = (int) (size * scale + 0.5f);
+            drawable.setBounds(0, 0, muchDp, muchDp);
+            if (direction == Gravity.LEFT) {
+                textView.setCompoundDrawables(drawable, null, null, null);//左边
+            } else if (direction == Gravity.TOP) {
+                textView.setCompoundDrawables(null, drawable, null, null);//顶部
+            } else if (direction == Gravity.RIGHT) {
+                textView.setCompoundDrawables(null, null, drawable, null);//右边
+            } else if (direction == Gravity.BOTTOM) {
+                textView.setCompoundDrawables(null, null, null, drawable);//底部
+            }
+
+
+            LinearLayout linearLayout = new LinearLayout(getContext());
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);//水平方向
+            linearLayout.setGravity(mGravity);//子view显示位置跟随TextView
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.
+                    LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            linearLayout.addView(textView, param);
+
+            mViewFlipper.addView(linearLayout, i);//添加子view,并标识子view位置
+        }
+    }
+
+    /**
+     * 设置TextView
+     */
+    private void setTextView(TextView textView, int position) {
+        textView.setText(mDatas.get(position));
+        //任意设置你的文字样式，在这里
+        textView.setSingleLine(isSingleLine);
+        textView.setEllipsize(TextUtils.TruncateAt.END);
+        textView.setTextColor(mTextColor);
+        textView.setTextSize(mTextSize);
+        textView.setGravity(mGravity);
+        textView.getPaint().setFlags(mFlags);//字体划线
+        textView.setTypeface(null, mTypeface);//字体样式
+    }
+
+
+    /**
+     * 设置点击监听事件回调
+     */
+    public void setItemOnClickListener(ITextBannerItemClickListener listener) {
+        this.mListener = listener;
     }
 
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        stop();
+        isDetachedFromWindow = true;
+        stopViewAnimator();
     }
 
     @Override
-    protected void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        isDetachedFromWindow = false;
+        startViewAnimator();
 
+    }
 }

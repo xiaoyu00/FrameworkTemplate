@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.framework.template">
-
     <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -39,25 +38,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FrameworkTemplate"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".simple.DataListActivity"/>
-        <activity android:name=".simple.CameraAlbumActivity"/>
-        <activity android:name=".simple.PermissionActivity"/>
-        <activity android:name=".simple.ScrollTextActivity"/>
-        <activity android:name=".simple.TextBannerActivity"/>
-        <activity android:name=".simple.ExpandableTextActivity"/>
-        <activity android:name=".simple.WeekUpScreenActivity"/>
-        <activity android:name=".simple.WorkLoadingActivity"/>
-        <activity android:name=".simple.WorkLoadingFragmentActivity"/>
-        <activity android:name=".simple.ShapeLoadingActivity"/>
+        <activity android:name=".simple.DataListActivity" />
+        <activity android:name=".simple.CameraAlbumActivity" />
+        <activity android:name=".simple.PermissionActivity" />
+        <activity android:name=".simple.ScrollTextActivity" />
+        <activity android:name=".simple.TextBannerActivity" />
+        <activity android:name=".simple.ExpandableTextActivity" />
+        <activity android:name=".simple.WeekUpScreenActivity" />
+        <activity android:name=".simple.WorkLoadingActivity" />
+        <activity android:name=".simple.WorkLoadingFragmentActivity" />
+        <activity android:name=".simple.ShapeLoadingActivity" />
+        <activity android:name=".simple.BottomNavigationActivity" />
     </application>
 
 </manifest>

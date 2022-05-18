@@ -47,6 +47,9 @@ class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>
         dataBinding.expandText.setOnClickListener {
             startActivity(Intent(this, ExpandableTextActivity::class.java))
         }
+        dataBinding.btnNav.setOnClickListener {
+            startActivity(Intent(this, BottomNavigationActivity::class.java))
+        }
     }
 
     override fun modelClass() = SimpleViewModel::class

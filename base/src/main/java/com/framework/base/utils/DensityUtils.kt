@@ -1,6 +1,8 @@
 package com.framework.base.utils
 
+import android.app.Activity
 import android.content.Context
+import android.util.DisplayMetrics
 import android.util.TypedValue
 
 /**
@@ -46,5 +48,31 @@ object DensityUtils {
      */
     fun pxToSp(context: Context, pxVal: Float): Float {
         return pxVal / context.resources.displayMetrics.scaledDensity
+    }
+
+    // 将px值转换为sp值
+    fun px2sp(context: Context, pxValue: Float): Int {
+        val fontScale = context.resources.displayMetrics.scaledDensity
+        return (pxValue / fontScale + 0.5f).toInt()
+    }
+
+    // 将sp值转换为px值
+    fun sp2px(context: Context, spValue: Float): Int {
+        val fontScale = context.resources.displayMetrics.scaledDensity
+        return (spValue * fontScale + 0.5f).toInt()
+    }
+
+    // 屏幕宽度（像素）
+    fun getWindowWidth(context: Activity): Int {
+        val metric = DisplayMetrics()
+        context.windowManager.defaultDisplay.getMetrics(metric)
+        return metric.widthPixels
+    }
+
+    // 屏幕高度（像素）
+    fun getWindowHeight(context: Activity): Int {
+        val metric = DisplayMetrics()
+        context.windowManager.defaultDisplay.getMetrics(metric)
+        return metric.heightPixels
     }
 }

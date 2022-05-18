@@ -25,4 +25,19 @@
         <item name="android:layout_height">0.5dp</item>
         <item name="android:background">#e0e0e0</item>
     </style>
+    <!--  底部菜单栏  默认PrimarySurface 彩色Colored-->
+    <!-- itemTextColor itemTextAppearanceActive itemTextAppearance -->
+    <style name="NavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemIconTint">@null</item>
+        <item name="badgeStyle">@style/BadgeStyle</item>
+    </style>
+    <!--  底部导航栏  角标-->
+    <style name="BadgeStyle">
+        <item name="badgeTextColor">@color/white</item>
+        <item name="backgroundColor">@color/blue</item>
+        <item name="maxCharacterCount">3</item>
+        <item name="badgeGravity">TOP_END</item>
+        <item name="verticalOffset">4dp</item>
+    </style>
 </resources>

@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/backgroud_spinner.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.14739583333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.14739583333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/ic_home_red_24dp.xml" value="0.14739583333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/ic_home_selecter.xml" value="0.14739583333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/ic_houme_selecter.xml" value="0.14739583333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/selecte_check.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/selecte_text_color.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/selecter_color.xml" value="0.14739583333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/shape_bg_stroke.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/shape_progress_bar.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/sl_bg_select.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.11145833333333334" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_camera_album.xml" value="0.1272644927536232" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_expandable_text.xml" value="0.11820652173913043" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_list.xml" value="0.1272644927536232" />
@@ -11,11 +24,16 @@
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_scroll_text.xml" value="0.13269927536231885" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_shape_loading.xml" value="0.12447916666666667" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_share.xml" value="0.12454710144927536" />
-        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_text_banner.xml" value="0.12454710144927536" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_text_banner.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_work_loading.xml" value="0.14895833333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/fragment_dashboard.xml" value="0.13125" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/fragment_home.xml" value="0.13125" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/fragment_my.xml" value="0.10625" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/fragment_notifications.xml" value="0.13125" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/fragment_work_loading.xml" value="0.13269927536231885" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/item_simple_list.xml" value="0.13269927536231885" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/item_simple_text_banner.xml" value="0.13269927536231885" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/menu/bottom_nav_menu.xml" value="0.13854166666666667" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/backgroud_spinner.xml" value="0.25729166666666664" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/ic_cancel_24.xml" value="0.14427083333333332" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/load_dialog_bg.xml" value="0.1265625" />
