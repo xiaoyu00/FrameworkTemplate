@@ -60,6 +60,7 @@
         <activity android:name=".simple.WorkLoadingFragmentActivity" />
         <activity android:name=".simple.ShapeLoadingActivity" />
         <activity android:name=".simple.BottomNavigationActivity" />
+        <activity android:name=".simple.PayActivity" />
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"

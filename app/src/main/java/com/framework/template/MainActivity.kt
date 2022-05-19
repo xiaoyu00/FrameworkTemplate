@@ -52,6 +52,9 @@ class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>
         dataBinding.btnNav.setOnClickListener {
             startActivity(Intent(this, BottomNavigationActivity::class.java))
         }
+        dataBinding.btnPay.setOnClickListener {
+            startActivity(Intent(this, PayActivity::class.java))
+        }
 
     }
 
