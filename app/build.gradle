@@ -59,6 +59,9 @@ android {
 }
 
 dependencies {
+
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.0'
+
     //com.blankj:utilcode 工具类
     /**
      * 基础必须
@@ -80,6 +83,7 @@ dependencies {
     // alternatively, just LiveData
     implementation "android.arch.lifecycle:livedata:1.1.1"
     implementation project(path: ':base')
+    implementation project(path: ':pay')
     implementation project(path: ':share')
     implementation project(path: ':mediaselect')
     // 须iava 8支持

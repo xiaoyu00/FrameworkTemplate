@@ -3,6 +3,8 @@ package com.framework.template
 import android.Manifest
 import android.content.Intent
 import com.framework.base.parent.BaseViewModelActivity
+import com.framework.pay.PayCall
+import com.framework.pay.PayManager
 import com.framework.share.ShareManager
 import com.framework.template.databinding.ActivityMainBinding
 import com.framework.template.simple.*
@@ -50,6 +52,7 @@ class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>
         dataBinding.btnNav.setOnClickListener {
             startActivity(Intent(this, BottomNavigationActivity::class.java))
         }
+
     }
 
     override fun modelClass() = SimpleViewModel::class

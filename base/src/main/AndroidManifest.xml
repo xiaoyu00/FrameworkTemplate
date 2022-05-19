@@ -6,33 +6,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
 
     <application>
         <activity
-            android:name=".simple.DataListActivity"
-            android:exported="false" />
-        <activity
             android:name=".component.task.TaskSimpleActivity"
             android:exported="false" />
-        <activity
-            android:name=".simple.PermissionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".simple.WeekUpScreenActivity"
-            android:exported="false" />
-        <activity
-            android:name=".simple.WorkLoadingFragmentActivity"
-            android:exported="true" />
-        <activity
-            android:name=".simple.WorkLoadingActivity"
-            android:exported="true" />
-        <activity
-            android:name=".simple.TextBannerActivity"
-            android:exported="true" />
-        <activity
-            android:name=".simple.ScrollTextActivity"
-            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

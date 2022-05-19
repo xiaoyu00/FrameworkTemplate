@@ -3,18 +3,10 @@ package com.framework.share.platform
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import com.framework.base.config.IS_DEBUG
-import com.framework.base.config.WECHAT_APPID
-import com.framework.base.config.WECHAT_APPLETID
-import com.framework.base.config.WECHAT_OPENID
-import com.framework.base.utils.ImageUtils
 import com.framework.share.core.BaseShare
 import com.framework.share.core.ShareCallBack
 import com.framework.share.core.ShareData
 import com.framework.share.core.ShareType
-import com.tencent.mm.opensdk.modelmsg.*
-import com.tencent.mm.opensdk.openapi.IWXAPI
-import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import java.io.File
 
 /**
