@@ -5,10 +5,17 @@ import android.content.Context
 import android.text.TextUtils
 import android.util.Log
 import com.alipay.sdk.app.PayTask
+import com.framework.pay.`interface`.AliPlatformCall
 
+private const val ALI_TYPE_PAY = 1
 
-class AliPay {
-    private val TAG = AliPay::class.simpleName
+class AliPlatform {
+    private val TAG = AliPlatform::class.simpleName
+    private var aliPlatformCall: AliPlatformCall? = null
+
+    fun setPlatformCall(aliPlatformCall: AliPlatformCall) {
+        this.aliPlatformCall = aliPlatformCall
+    }
 
     fun checkInstall(): Boolean {
         return true
@@ -17,13 +24,13 @@ class AliPay {
     fun init(context: Context) {
     }
 
-    fun pay(activity: Activity, orderInfo: String, payCall: PayCall?) {
+    fun pay(activity: Activity, orderInfo: String) {
         val alipay = PayTask(activity)
         val result = alipay.payV2(orderInfo, true)
-        onHandle(result, payCall)
+        onHandle(ALI_TYPE_PAY, result)
     }
 
-    private fun onHandle(result: Map<String, String>, payCall: PayCall?) {
+    private fun onHandle(type: Int, result: Map<String, String>) {
         /**
          * 对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
          */
@@ -40,6 +47,9 @@ class AliPay {
                 code = it
             }
             payCall?.onError(code, "支付失败")
+        }
+        when (type) {
+            ALI_TYPE_PAY ->
         }
 
     }
