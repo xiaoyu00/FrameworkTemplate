@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/compress" />
+            <option value="$PROJECT_DIR$/javaclass" />
             <option value="$PROJECT_DIR$/mediaselect" />
             <option value="$PROJECT_DIR$/platformverify" />
             <option value="$PROJECT_DIR$/selector" />

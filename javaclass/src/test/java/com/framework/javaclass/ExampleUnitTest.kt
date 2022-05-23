@@ -1,4 +1,4 @@
-package com.framework.thirdpartyverify
+package com.framework.javaclass
 
 import org.junit.Test
 
