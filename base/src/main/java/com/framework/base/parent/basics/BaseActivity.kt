@@ -8,7 +8,7 @@ import android.view.ViewTreeObserver
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.R
+import com.framework.base.R
 import com.framework.base.utils.ScreenUtils
 
 /**
