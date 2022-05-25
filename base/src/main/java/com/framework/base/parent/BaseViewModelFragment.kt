@@ -25,7 +25,7 @@ abstract class BaseViewModelFragment<M : ViewModel, D : ViewDataBinding> :
      * 获取view model 标志
      *  true 表示从Fragment获取, false 表示从activity获取
      */
-    open fun isOwner() = true
+    open fun isOwner() = false
 
     /**
      * 创建ViewModel

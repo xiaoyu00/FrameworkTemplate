@@ -1,10 +1,13 @@
 package com.framework.base.utils
 
 import android.app.Activity
+import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 
 object ScreenUtils {
@@ -78,4 +81,35 @@ object ScreenUtils {
         return activity.window.findViewById<View>(Window.ID_ANDROID_CONTENT).top
     }
 
+    /**
+     * 获取除虚拟按键屏幕的尺寸
+     */
+    fun getDisplayMetrics(activity: Activity): DisplayMetrics {
+        var mDisplayMetrics = DisplayMetrics()
+        activity.windowManager.defaultDisplay.getMetrics(mDisplayMetrics)
+        return mDisplayMetrics
+    }
+
+    /**
+     * 获取原始的屏幕的尺寸
+     */
+    fun getReaDisplayMetrics(activity: Activity): DisplayMetrics {
+        var mDisplayMetrics = DisplayMetrics()
+        activity.windowManager.defaultDisplay.getRealMetrics(mDisplayMetrics)
+        return mDisplayMetrics
+    }
+    /**
+     * 隐藏状态栏
+     */
+    fun hideWindowStatusBar(window: Window) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = Color.TRANSPARENT
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        }
+    }
 }
