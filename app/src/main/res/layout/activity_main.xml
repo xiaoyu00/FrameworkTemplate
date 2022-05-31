@@ -92,6 +92,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="支付" />
+            <Button
+                android:id="@+id/btn_face"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="输入表情" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

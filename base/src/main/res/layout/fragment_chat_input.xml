@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/layout_chat_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_color" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:animateLayoutChanges="true"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/voice_input_switch"
+                android:layout_width="26.88dp"
+                android:layout_height="26.88dp"
+                android:layout_margin="5dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/action_audio_selector" />
+
+            <com.framework.base.component.face.core.InputMentionEditText
+                android:id="@+id/chat_message_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/msg_editor_border"
+                android:maxHeight="120dp"
+                android:minHeight="32.64dp"
+                android:padding="5dp"
+                android:textCursorDrawable="@drawable/my_cursor"
+                android:textSize="15.55sp" />
+
+            <Button
+                android:id="@+id/chat_voice_input"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/voice_btn_selector"
+                android:text="@string/hold_say"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_gray"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/face_btn"
+                android:layout_width="26.88dp"
+                android:layout_height="26.88dp"
+                android:layout_margin="5dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/action_face_selector" />
+
+            <ImageView
+                android:id="@+id/more_btn"
+                android:layout_width="26.88dp"
+                android:layout_height="26.88dp"
+                android:layout_margin="5dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/action_more_selector" />
+
+            <TextView
+                android:id="@+id/send_btn"
+                android:layout_width="50dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:background="@drawable/message_send_border"
+                android:text="@string/send"
+                android:textColor="#fff"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:visibility="visible" />
+
+    </LinearLayout>
+</layout>

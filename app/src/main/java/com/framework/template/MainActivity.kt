@@ -2,6 +2,7 @@ package com.framework.template
 
 import android.Manifest
 import android.content.Intent
+import android.util.Log
 import com.framework.base.parent.BaseViewModelActivity
 import com.framework.template.databinding.ActivityMainBinding
 import com.framework.template.simple.*
@@ -52,8 +53,28 @@ class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>
         dataBinding.btnPay.setOnClickListener {
             startActivity(Intent(this, PayActivity::class.java))
         }
-
+        dataBinding.btnFace.setOnClickListener {
+            startActivity(Intent(this, FaceActivity::class.java))
+        }
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.e("sssss","ssss:::onStart")
+    }
+    override fun onResume() {
+        super.onResume()
+        Log.e("sssss","ssss:::onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e("sssss","ssss:::onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("sssss","ssss:::onStop")
+    }
     override fun modelClass() = SimpleViewModel::class
 }

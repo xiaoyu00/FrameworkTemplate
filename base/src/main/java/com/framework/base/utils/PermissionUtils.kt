@@ -376,7 +376,7 @@ object PermissionUtils {
                 .query(uri2, null, selection, selectionArgs, null)
             if (cursor != null) {
                 return if (cursor.moveToFirst()) {
-                    val c=cursor.getColumnIndex("currentstate")
+                    val c = cursor.getColumnIndex("currentstate")
                     val currentmode = cursor.getInt(c);
                     cursor.close()
                     currentmode
@@ -390,12 +390,13 @@ object PermissionUtils {
         }
         return 1
     }
+
     /**
      * 判断后台弹出界面 通用
      * @param context
      * @return
      */
-    fun canDrawOverlay(context: Context):Boolean{
+    fun canDrawOverlay(context: Context): Boolean {
         return Settings.canDrawOverlays(context)
     }
 
@@ -419,5 +420,28 @@ object PermissionUtils {
         val packageURI = Uri.parse("package:" + context.packageName)
         val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI)
         context.startActivity(intent)
+    }
+
+    private fun isIntentAvailable(context: Context, intent: Intent): Boolean {
+        return context.packageManager
+            .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+            .size > 0
+    }
+
+    /**
+     * Launch the application's details settings.
+     */
+    fun launchAppDetailsSettings(context: Context) {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        intent.data = Uri.parse(
+            "package:" + context
+                .packageName
+        )
+        if (isIntentAvailable(context, intent)) return
+        context.startActivity(
+            intent.addFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK
+            )
+        )
     }
 }

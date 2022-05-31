@@ -11,9 +11,13 @@
     <color name="red_pressed">#fb6e6e</color>
     <color name="grey">#FF808080</color>
     <color name="grey_pressed">#a8a8a8</color>
+    <color name="green">#70C160</color>
     <color name="blue">#63aade</color>
     <color name="blue_pressed">#99ccee</color>
     <color name="orange">#FA7C20</color>
     <color name="transparent">#00000000</color>
     <color name="line_color">#e0e0e0</color>
+    <color name="voice_pressed">#DEDEDE</color>
+    <color name="voice_normal">#ffffff</color>
+    <color name="text_color_gray">#696969</color>
 </resources>

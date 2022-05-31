@@ -14,11 +14,15 @@ abstract class BaseBindingFragment<D : ViewDataBinding> : BaseFragment() {
     lateinit var dataBinding: D
     override fun initBase(inflater: LayoutInflater, container: ViewGroup?): View {
         dataBinding = DataBindingUtil.inflate(inflater, contextViewId(), container, false)
+        onBindingCreated()
         return dataBinding.apply {
             lifecycleOwner = viewLifecycleOwner
         }.root
     }
 
+    open fun onBindingCreated() {
+
+    }
 //    override fun onDestroy() {
 //        super.onDestroy()
 //        if (::dataBinding.isInitialized) {

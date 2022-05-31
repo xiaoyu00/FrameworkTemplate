@@ -112,4 +112,19 @@ object ScreenUtils {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         }
     }
+
+    // 兼容有导航键的情况
+     fun getNavigateBarHeight(context:Context): Int {
+        val metrics = DisplayMetrics()
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        windowManager.defaultDisplay.getMetrics(metrics)
+        val usableHeight = metrics.heightPixels
+        windowManager.defaultDisplay.getRealMetrics(metrics)
+        val realHeight = metrics.heightPixels
+        return if (realHeight > usableHeight) {
+            realHeight - usableHeight
+        } else {
+            0
+        }
+    }
 }

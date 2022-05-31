@@ -36,6 +36,6 @@
             android:layout_width="13dp"
             android:layout_height="13dp"
             android:layout_marginLeft="3dp"
-            android:src="@drawable/icon_green_arrow_down" />
+            android:src="@mipmap/icon_green_arrow_down" />
     </LinearLayout>
 </LinearLayout>

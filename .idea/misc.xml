@@ -12,12 +12,14 @@
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/selecte_check.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/selecte_text_color.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/selecter_color.xml" value="0.14739583333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/selector_face_text.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/shape_bg_stroke.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/shape_progress_bar.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/drawable/sl_bg_select.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.11145833333333334" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_camera_album.xml" value="0.1272644927536232" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_expandable_text.xml" value="0.11820652173913043" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_face.xml" value="0.14719202898550723" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_list.xml" value="0.1272644927536232" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_main.xml" value="0.11" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_pay.xml" value="0.1213768115942029" />
@@ -28,6 +30,7 @@
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_text_banner.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_work_loading.xml" value="0.14895833333333333" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/activity_work_loading_fragment.xml" value="0.1" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/face_group_icon.xml" value="0.14719202898550723" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/fragment_dashboard.xml" value="0.13125" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/fragment_home.xml" value="0.13125" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/fragment_my.xml" value="0.10625" />
@@ -36,11 +39,20 @@
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/item_simple_list.xml" value="0.13269927536231885" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/layout/item_simple_text_banner.xml" value="0.13269927536231885" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/app/src/main/res/menu/bottom_nav_menu.xml" value="0.13854166666666667" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/action_audio_selector.xml" value="0.15677083333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/action_face_selector.xml" value="0.15677083333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/action_more_selector.xml" value="0.15677083333333333" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/backgroud_spinner.xml" value="0.25729166666666664" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/face_btn_selector.xml" value="0.11481481481481481" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/ic_cancel_24.xml" value="0.14427083333333332" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/load_dialog_bg.xml" value="0.1265625" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/load_shadow.xml" value="0.11510416666666666" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/message_send_border.xml" value="0.15677083333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/msg_editor_border.xml" value="0.15677083333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/my_cursor.xml" value="0.15677083333333333" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/selector_face_text.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/shape_bg_white_6dp.xml" value="0.25729166666666664" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/drawable/voice_btn_selector.xml" value="0.11481481481481481" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/activity_list.xml" value="0.15112037519541427" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/activity_permssion.xml" value="0.1" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/activity_scroll_text.xml" value="0.20885416666666667" />
@@ -49,13 +61,21 @@
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/activity_work_loading.xml" value="0.178125" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/activity_work_loading_fragment.xml" value="0.24114583333333334" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/dialog_default_loading.xml" value="0.24114583333333334" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/dialog_input.xml" value="0.14666666666666667" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/dialog_load_shape.xml" value="0.11041666666666666" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/dialog_progress.xml" value="0.12952898550724637" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/face_group_icon.xml" value="0.14719202898550723" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/fragment_chat_face.xml" value="0.14719202898550723" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/fragment_chat_input.xml" value="0.11979166666666667" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/fragment_face.xml" value="0.14719202898550723" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/fragment_more_input.xml" value="0.12395833333333334" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/fragment_work_loading.xml" value="0.24114583333333334" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/item_expand_collapse.xml" value="0.11820652173913043" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/item_face.xml" value="0.13385416666666666" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/item_simple_list.xml" value="0.13541666666666666" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/item_simple_text_banner.xml" value="0.178125" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/layout_error_loading_view.xml" value="0.2" />
+        <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/layout_input_view.xml" value="0.14666666666666667" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/layout_loading_view.xml" value="0.11302083333333333" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/layout_progress.xml" value="0.128125" />
         <entry key="..\:/Android/AndroidStudioProjects/FrameworkTemplate/base/src/main/res/layout/layout_progress_item.xml" value="0.12952898550724637" />

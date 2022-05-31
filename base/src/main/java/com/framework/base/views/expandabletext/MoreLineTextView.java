@@ -71,7 +71,7 @@ public class MoreLineTextView extends LinearLayout implements View.OnClickListen
             mDurationMillis = typedArray.getInt(R.styleable.MoreTextStyle_durationMillis, DEFAULT_ANIM_TIME);
             mClickAll = typedArray.getBoolean(R.styleable.MoreTextStyle_clickAll, false);
             if (mExpandDrawable == null) {
-                mExpandDrawable = ContextCompat.getDrawable(getContext(), R.drawable.icon_green_arrow_down);
+                mExpandDrawable = ContextCompat.getDrawable(getContext(), R.mipmap.icon_green_arrow_down);
             }
             typedArray.recycle();
         }

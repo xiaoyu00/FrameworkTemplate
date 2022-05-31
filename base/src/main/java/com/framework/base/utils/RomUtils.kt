@@ -30,6 +30,9 @@ object RomUtils {
     private const val KEY_VERSION_VIVO = "ro.vivo.os.version"
     private var sName: String? = null
     private var sVersion: String? = null
+    private var BRAND = "" //Build.BRAND;
+    private var MANUFACTURER = "" //Build.MANUFACTURER;
+
 
     //华为
     fun isEmui(): Boolean {
@@ -157,5 +160,148 @@ object RomUtils {
             }
         }
         return line
+    }
+
+    /**
+     * 判断是否为小米设备
+     */
+    fun isBrandXiaoMi(): Boolean {
+        return ("xiaomi".equals(
+            getBrand(),
+            ignoreCase = true
+        )
+                || "xiaomi".equals(
+            getManufacturer(),
+            ignoreCase = true
+        ))
+    }
+
+    /**
+     * 判断是否为华为设备
+     */
+    fun isBrandHuawei(): Boolean {
+        return "huawei".equals(
+            getBrand(),
+            ignoreCase = true
+        ) ||
+                "huawei".equals(
+                    getManufacturer(),
+                    ignoreCase = true
+                ) ||
+                "honor".equals(
+                    getBrand(),
+                    ignoreCase = true
+                ) ||
+                "honor".equals(
+                    getManufacturer(),
+                    ignoreCase = true
+                )
+    }
+
+    /**
+     * 判断是否为魅族设备
+     */
+    fun isBrandMeizu(): Boolean {
+        return ("meizu".equals(
+            getBrand(),
+            ignoreCase = true
+        )
+                || "meizu".equals(
+            getManufacturer(),
+            ignoreCase = true
+        )
+                || "22c4185e".equals(
+            getBrand(),
+            ignoreCase = true
+        ))
+    }
+
+    /**
+     * 判断是否是 oppo 设备, 包含子品牌
+     *
+     * @return
+     */
+    fun isBrandOppo(): Boolean {
+        return "oppo".equals(
+            getBrand(),
+            ignoreCase = true
+        ) ||
+                "realme".equals(
+                    getBrand(),
+                    ignoreCase = true
+                ) ||
+                "oneplus".equals(
+                    getBrand(),
+                    ignoreCase = true
+                ) ||
+                "oppo".equals(
+                    getManufacturer(),
+                    ignoreCase = true
+                ) ||
+                "realme".equals(
+                    getManufacturer(),
+                    ignoreCase = true
+                ) ||
+                "oneplus".equals(
+                    getManufacturer(),
+                    ignoreCase = true
+                )
+    }
+
+    /**
+     * 判断是否是vivo设备
+     *
+     * @return
+     */
+    fun isBrandVivo(): Boolean {
+        return ("vivo".equals(
+            getBrand(),
+            ignoreCase = true
+        )
+                || "vivo".equals(
+            getManufacturer(),
+            ignoreCase = true
+        ))
+    }
+
+//    /**
+//     * 判断是否支持谷歌服务
+//     *
+//     * @return
+//     */
+//    fun isGoogleServiceSupport(): Boolean {
+//        val googleApiAvailability: GoogleApiAvailability = GoogleApiAvailability.getInstance()
+//        val resultCode: Int =
+//            googleApiAvailability.isGooglePlayServicesAvailable(TUIOfflinePushService.appContext)
+//        return resultCode == ConnectionResult.SUCCESS
+//    }
+private fun getBrand(): String {
+        if (BRAND.isEmpty()) {
+            synchronized(RomUtils::class.java) {
+                if (BRAND.isEmpty()) {
+                    BRAND = Build.BRAND
+                    Log.i(
+                        TAG,
+                        "get BRAND by Build.BRAND :$BRAND"
+                    )
+                }
+            }
+        }
+        return BRAND
+    }
+    private fun getManufacturer(): String {
+        if (MANUFACTURER.isEmpty()) {
+            synchronized(RomUtils::class.java) {
+                if (MANUFACTURER.isEmpty()) {
+                    MANUFACTURER =
+                        Build.MANUFACTURER
+                    Log.i(
+                        TAG,
+                        "get MANUFACTURER by Build.MANUFACTURER :$MANUFACTURER"
+                    )
+                }
+            }
+        }
+        return MANUFACTURER
     }
 }

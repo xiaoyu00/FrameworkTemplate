@@ -87,12 +87,12 @@ abstract class BaseActivity : AppCompatActivity() {
         val observer = layout.viewTreeObserver
         observer.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
+                //如果去掉此行代码后 每次布局变化都会执行onGlobalLayoutCompleted
                 layout.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 onGlobalLayoutCompleted()
             }
         })
     }
-
     private fun initStatusBarHeight() {
         mStatusBarHeight = ScreenUtils.getStatusBarHeight(this)
     }
