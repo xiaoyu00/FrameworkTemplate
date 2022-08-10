@@ -73,12 +73,33 @@ public class FileUtil {
 
     public static boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
+        if (Environment.MEDIA_MOUNTED.equals(state) || !Environment.isExternalStorageRemovable()) {
             return true;
         }
         return false;
     }
 
+    public String getFilesPath(Context context) {
+        String filePath;
+        if (isExternalStorageWritable()) {
+            filePath = context.getExternalFilesDir(null).getPath();
+        } else {
+            //外部存储不可用
+            filePath = context.getFilesDir().getPath();
+        }
+        return filePath;
+    }
+    public String getCachePath( Context context ){
+        String cachePath ;
+        if (isExternalStorageWritable()) {
+            //外部存储可用
+            cachePath = context.getExternalCacheDir().getPath() ;
+        }else {
+            //外部存储不可用
+            cachePath = context.getCacheDir().getPath() ;
+        }
+        return cachePath ;
+    }
     /**
      * @param context
      * @param chooseMode
@@ -356,6 +377,7 @@ public class FileUtil {
         }
         context.startActivity(intent);
     }
+
     public static File getDocumentCacheDir(@NonNull Context context) {
         File dir = new File(context.getCacheDir(), DOCUMENTS_DIR);
         if (!dir.exists()) {
@@ -364,6 +386,7 @@ public class FileUtil {
 
         return dir;
     }
+
     private static void saveFileFromUri(Context context, Uri uri, String destinationPath) {
         InputStream is = null;
         BufferedOutputStream bos = null;
@@ -387,6 +410,7 @@ public class FileUtil {
             }
         }
     }
+
     /**
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
@@ -420,6 +444,7 @@ public class FileUtil {
         }
         return null;
     }
+
     /**
      * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
@@ -443,6 +468,7 @@ public class FileUtil {
     public static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
+
     /**
      * 转换文件大小
      *
@@ -467,6 +493,7 @@ public class FileUtil {
         }
         return fileSizeString;
     }
+
     // 修复 android.webkit.MimeTypeMap 的 getFileExtensionFromUrl 方法不支持中文的问题
     public static String getFileExtensionFromUrl(String url) {
         if (!TextUtils.isEmpty(url)) {
@@ -499,6 +526,7 @@ public class FileUtil {
 
         return "";
     }
+
     private static String getPathByCopyFile(Context context, Uri uri) {
         String fileName = getFileName(context, uri);
         File cacheDir = getDocumentCacheDir(context);
@@ -511,14 +539,15 @@ public class FileUtil {
 
         return destinationPath;
     }
-    public static String getPathFromUri(Context context,Uri uri) {
+
+    public static String getPathFromUri(Context context, Uri uri) {
         String path = "";
         try {
             int sdkVersion = Build.VERSION.SDK_INT;
             if (sdkVersion >= 19) {
                 path = getPathByCopyFile(context, uri);
             } else {
-                path = getRealFilePath(context,uri);
+                path = getRealFilePath(context, uri);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -528,7 +557,8 @@ public class FileUtil {
         }
         return path;
     }
-    public static String getRealFilePath(Context context,Uri uri) {
+
+    public static String getRealFilePath(Context context, Uri uri) {
         if (null == uri) {
             return null;
         }
@@ -552,6 +582,7 @@ public class FileUtil {
         }
         return data;
     }
+
     /**
      * 专为Android4.4以上设计的从Uri获取文件路径
      */
@@ -645,6 +676,7 @@ public class FileUtil {
 
         return null;
     }
+
     @Nullable
     public static File generateFileName(@Nullable String name, File directory) {
         if (name == null) {
@@ -683,6 +715,7 @@ public class FileUtil {
 
         return file;
     }
+
     public static String getFileName(@NonNull Context context, Uri uri) {
         String mimeType = context.getContentResolver().getType(uri);
         String filename = null;
@@ -702,6 +735,7 @@ public class FileUtil {
 
         return filename;
     }
+
     private static String getName(String filename) {
         if (filename == null) {
             return null;
@@ -709,9 +743,10 @@ public class FileUtil {
         int index = filename.lastIndexOf('/');
         return filename.substring(index + 1);
     }
-    public static void openFile(Context context,String path,String authority, String fileName) {
 
-        Uri uri = FileProvider.getUriForFile(context,authority,new File(path));
+    public static void openFile(Context context, String path, String authority, String fileName) {
+
+        Uri uri = FileProvider.getUriForFile(context, authority, new File(path));
         if (uri == null) {
             Log.e("FileUtil", "openFile failed , uri is null");
             return;

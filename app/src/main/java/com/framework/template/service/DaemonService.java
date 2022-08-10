@@ -4,10 +4,12 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.Process;
+
+import androidx.annotation.Nullable;
 
 import com.framework.template.R;
 
@@ -15,25 +17,11 @@ import com.framework.template.R;
  * 程序运行提示service（在通知栏一直显示）
  */
 public class DaemonService extends Service {
-    public DaemonService() {
-    }
-
-    private NotificationManager notificationManager;
+    private String TAG = DaemonService.class.getSimpleName();
+    private long RECEIVER_INTERVAL = 5000L;
     private String notificationId = "serviceid";
-    private String notificationName = "servicename";
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(notificationId, notificationName, NotificationManager.IMPORTANCE_HIGH);
-            notificationManager.createNotificationChannel(channel);
-        }
-        startForeground(1, getNotification());
-    }
-
-    private Notification getNotification() {
+    public Notification getNotification() {
         Notification.Builder builder = new Notification.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(getResources().getText(R.string.app_name))
@@ -46,9 +34,34 @@ public class DaemonService extends Service {
     }
 
 
+    // 启动notification的id，两次启动应是同一个id
+    private int NOTIFICATION_ID = Process.myPid();
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            //数字是随便写的“40”，
+            nm.createNotificationChannel(
+                    new NotificationChannel(
+                            "WorkService_id",
+                            "WorkService",
+                            NotificationManager.IMPORTANCE_DEFAULT
+                    )
+            );
+        }
+        startForeground(NOTIFICATION_ID, getNotification());
+    }
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        // 如果Service被终止
+        // 当资源允许情况下，重启service
+        return START_STICKY;
+    }
+    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+        return null;
     }
 }

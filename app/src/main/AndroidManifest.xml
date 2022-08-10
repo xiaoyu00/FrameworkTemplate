@@ -38,7 +38,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FrameworkTemplate"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"> <!--  设置true后可使用http  -->
 
         <activity
             android:name=".MainActivity"
@@ -75,6 +75,7 @@
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
+        <service android:name="com.framework.base.component.socket.SocketService"/>
     </application>
 
 </manifest>
