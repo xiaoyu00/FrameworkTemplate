@@ -1,5 +1,7 @@
 package com.framework.base.utils;
 
+import android.os.Looper;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -13,7 +15,12 @@ public final class ThreadHelper {
 
     private ThreadHelper(){
     }
-
+    /**
+     * 是否是主线程
+     */
+    public static boolean isMainThread() {
+        return Looper.myLooper() == Looper.getMainLooper();
+    }
     /**
      * 在线程中执行
      * @param runnable 要执行的runnable

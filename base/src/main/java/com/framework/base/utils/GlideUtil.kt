@@ -6,6 +6,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.framework.base.R
 
+/**
+ * glide工具类
+ */
 object GlideUtil {
 
     fun loadImage(

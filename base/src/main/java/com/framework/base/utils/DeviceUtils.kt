@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat.getSystemService
  * @author yu
  * @version 1.0
  * @date 2021/4/15
- * @description
+ * @description 设备工具类
  */
 object DeviceUtil {
     /**

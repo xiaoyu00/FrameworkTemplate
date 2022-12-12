@@ -18,6 +18,9 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+/**
+ * 格式化工具类
+ */
 public class FormatterUtil {
 
     public static final String TAG = NumberFormat.class.getSimpleName();

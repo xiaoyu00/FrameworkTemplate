@@ -7,8 +7,15 @@ import android.os.IBinder;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+/**
+ * 软键盘工具类
+ */
 public class SoftKeyBoardUtil {
-
+    /**
+     * 获取软键盘高度
+     * @param context
+     * @return
+     */
     public static int getSoftKeyBoardHeight(Context context) {
         View decorView = ((Activity) context).getWindow().getDecorView();
         int screenHeight = decorView.getHeight();
@@ -17,6 +24,11 @@ public class SoftKeyBoardUtil {
         return screenHeight - rect.bottom - ScreenUtils.INSTANCE.getNavigateBarHeight(context);
     }
 
+    /**
+     * 隐藏软键盘
+     * @param context
+     * @param token
+     */
     public static void hideSoftInput(Context context, IBinder token) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null && isSoftInputShown(context)) {
@@ -31,6 +43,11 @@ public class SoftKeyBoardUtil {
         }
     }
 
+    /**
+     * 是否打开软键盘
+     * @param context
+     * @return
+     */
     public static boolean isSoftInputShown(Context context) {
         View decorView = ((Activity) context).getWindow().getDecorView();
         int screenHeight = decorView.getHeight();
