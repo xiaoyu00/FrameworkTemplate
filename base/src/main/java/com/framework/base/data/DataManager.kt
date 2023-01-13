@@ -18,17 +18,17 @@ object DataManager {
     val userData = UserData()
 
     suspend fun getLandsAndUpload() = withContext(Dispatchers.IO) {
-        val landList = userData.getLocalLands(userId)
+        val landList = userData.getLocalLands(12345)
         if (!landList.isNullOrEmpty()) {
             landList.forEach { l ->
                 userData.add(l)
             }
         }
     }
-    suspend fun getLands(baseId: Long, hasNet: Boolean): List<Land> {
-        if (hasNet) {
-            userData.getLands(baseId)
-        }
-        return userData.getLocalLands(baseId)
-    }
+//    suspend fun getLands(baseId: Long, hasNet: Boolean): List<Land> {
+//        if (hasNet) {
+//            userData.getLands(baseId)
+//        }
+//        return userData.getLocalLands(baseId)
+//    }
 }

@@ -3,9 +3,11 @@ package com.framework.template
 import android.Manifest
 import android.content.Intent
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import com.framework.base.parent.BaseViewModelActivity
 import com.framework.template.databinding.ActivityMainBinding
 import com.framework.template.simple.*
+import kotlinx.coroutines.launch
 
 class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>() {
     var permissions = arrayOf(

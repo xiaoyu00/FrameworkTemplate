@@ -3,28 +3,15 @@ package com.framework.base.component.chatinput;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import static androidx.core.view.WindowInsetsAnimationCompat.Callback.DISPATCH_MODE_CONTINUE_ON_SUBTREE;
-
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.os.Handler;
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.graphics.Insets;
-import androidx.core.view.*;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.framework.base.R;
 import com.framework.base.component.face.FaceChatFragment;
@@ -34,14 +21,10 @@ import com.framework.base.component.face.core.FaceManager;
 import com.framework.base.component.face.core.InputMentionEditText;
 import com.framework.base.databinding.FragmentChatInputBinding;
 import com.framework.base.parent.basics.BaseBindingFragment;
-import com.framework.base.utils.ScreenUtils;
 import com.framework.base.utils.SoftKeyBoardUtil;
 
-import java.util.List;
-
 public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBinding> {
-    private FaceChatFragment faceChatFragment = new FaceChatFragment();
-    private MoreInputFragment moreInputFragment = new MoreInputFragment();
+
     /**
      * 语音/文字切换输入控件
      */
@@ -55,9 +38,12 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
      */
     protected boolean mMoreInputDisable = false;
 
-    private boolean isPanelShow = false;
-    private ValueAnimator valueAnimator;
+    private FaceChatFragment faceChatFragment;
+
+    private PanelControlListener panelControlListener;
+
     private String mInputContent;
+
     @Override
     public int contextViewId() {
         return R.layout.fragment_chat_input;
@@ -67,19 +53,24 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
     public void initialize() {
         initFragments();
         initViews();
-
     }
+
+    public void setFaceChatFragment(FaceChatFragment fragment) {
+        faceChatFragment = fragment;
+    }
+
     @SuppressLint("ClickableViewAccessibility")
-    private void initViews(){
+    private void initViews() {
         dataBinding.voiceInputSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                panelHide();
+                panelControlListener.onPanelHide();
                 dataBinding.faceBtn.setImageResource(R.drawable.action_face_selector);
                 if (mAudioInputDisable) {
                     dataBinding.chatVoiceInput.setVisibility(GONE);
                     dataBinding.chatMessageInput.setVisibility(VISIBLE);
                     dataBinding.voiceInputSwitch.setImageResource(R.drawable.action_audio_selector);
+                    dataBinding.chatMessageInput.requestFocus();
                     showSoftInput();
                 } else {
                     dataBinding.voiceInputSwitch.setImageResource(R.mipmap.chat_input_keyboard);
@@ -103,10 +94,8 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
 
                     dataBinding.chatVoiceInput.setVisibility(GONE);
                     dataBinding.chatMessageInput.setVisibility(VISIBLE);
-                    getChildFragmentManager().beginTransaction()
-                            .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                            .replace(R.id.fragment_panel, faceChatFragment, "faceChatFragment").commit();
-                    panelShow();
+                    panelControlListener.onSwitchPanelFragment(1);
+                    panelControlListener.onPanelShow();
                     SoftKeyBoardUtil.hideSoftInput(requireContext(), dataBinding.chatMessageInput.getWindowToken());
                 }
                 mEmojiInputDisable = !mEmojiInputDisable;
@@ -125,10 +114,8 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
                     dataBinding.faceBtn.setImageResource(R.drawable.action_face_selector);
                     dataBinding.chatVoiceInput.setVisibility(GONE);
                     dataBinding.chatMessageInput.setVisibility(VISIBLE);
-                    panelShow();
-                    getChildFragmentManager().beginTransaction()
-                            .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                            .replace(R.id.fragment_panel, moreInputFragment, "moreInputFragment").commit();
+                    panelControlListener.onPanelShow();
+                    panelControlListener.onSwitchPanelFragment(2);
                 }
                 mEmojiInputDisable = false;
                 mAudioInputDisable = false;
@@ -177,13 +164,14 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
                     mEmojiInputDisable = false;
                     mAudioInputDisable = false;
                     mMoreInputDisable = false;
-                    showSoftInput();
+                    panelControlListener.onPanelHide();
                 }
                 return false;
             }
         });
     }
-    private void initFragments(){
+
+    private void initFragments() {
         faceChatFragment.setEmojiClickListener(new OnEmojiClickListener() {
             @Override
             public void onEmojiClick(Emoji emoji) {
@@ -199,54 +187,28 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
             }
         });
     }
-    private void initPanel() {
-        int panelHeight = ScreenUtils.INSTANCE.getTotalScreenHeight(requireActivity()) / 3;
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, panelHeight);
-        dataBinding.fragmentPanel.setLayoutParams(layoutParams);
-        ((LinearLayout.LayoutParams) dataBinding.getRoot().getLayoutParams()).bottomMargin = -panelHeight;
-        valueAnimator = ValueAnimator.ofInt(0, -panelHeight);
-        valueAnimator.setDuration(200);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                ((LinearLayout.LayoutParams) dataBinding.getRoot().getLayoutParams()).bottomMargin = (int) animation.getAnimatedValue();
-                dataBinding.getRoot().requestLayout();
-
-            }
-        });
-        getChildFragmentManager().beginTransaction()
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                .replace(R.id.fragment_panel, faceChatFragment, "faceChatFragment").commit();
-    }
 
     public void showSoftInput() {
-        panelHide();
+        panelControlListener.onPanelHide();
         dataBinding.voiceInputSwitch.setImageResource(R.drawable.action_audio_selector);
         dataBinding.faceBtn.setImageResource(R.mipmap.chat_input_face);
         dataBinding.chatVoiceInput.setVisibility(GONE);
         dataBinding.chatMessageInput.setVisibility(VISIBLE);
-        dataBinding.chatMessageInput.requestFocus();
         SoftKeyBoardUtil.showSoftInput(requireContext());
 
     }
 
-    private void panelHide() {
-        if (isPanelShow) {
-            valueAnimator.start();
-            isPanelShow = false;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof PanelControlListener){
+            panelControlListener= (PanelControlListener) context;
         }
-    }
-
-    private void panelShow() {
-        if (!isPanelShow) {
-            valueAnimator.reverse();
-            isPanelShow = true;
-        }
-
     }
 
     @Override
-    public void onGlobalLayoutCompleted() {
-        initPanel();
+    public void onDetach() {
+        super.onDetach();
+        panelControlListener=null;
     }
 }

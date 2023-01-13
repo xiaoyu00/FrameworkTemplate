@@ -31,8 +31,10 @@ public class FaceChatFragment extends BaseBindingFragment<FragmentChatFaceBindin
     @Override
     public void initialize() {
         initFaceFragments();
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, ScreenUtils.INSTANCE.getTotalScreenHeight(requireActivity()) / 3);
-        dataBinding.fragmentRoot.setLayoutParams(layoutParams);
+    }
+
+    @Override
+    public void onGlobalLayoutCompleted() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(requireActivity(), fragments);
         dataBinding.pageFace.setAdapter(viewPagerAdapter);
         dataBinding.pageFace.setOffscreenPageLimit(2);

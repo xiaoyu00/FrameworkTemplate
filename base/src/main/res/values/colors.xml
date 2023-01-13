@@ -18,6 +18,6 @@
     <color name="transparent">#00000000</color>
     <color name="line_color">#e0e0e0</color>
     <color name="voice_pressed">#DEDEDE</color>
-    <color name="voice_normal">#ffffff</color>
+    <color name="voice_normal">#ECECEC</color>
     <color name="text_color_gray">#696969</color>
 </resources>
