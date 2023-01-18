@@ -10,21 +10,18 @@ import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
-import androidx.fragment.app.Fragment
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
-import androidx.lifecycle.Observer
-import androidx.slidingpanelayout.widget.SlidingPaneLayout
-import com.framework.base.component.chatinput.ChatInputFragment
-import com.framework.base.component.chatinput.MoreInputFragment
-import com.framework.base.component.chatinput.PanelControlListener
+import com.framework.base.component.chatinput.*
 import com.framework.base.component.face.FaceChatFragment
 import com.framework.base.keyboard.KeyBoardInsetsCallBack
 import com.framework.base.keyboard.KeyBoardListener
+import com.framework.base.utils.SoftKeyBoardUtil
 import com.framework.template.R
 
 /**
  * 表情
  */
+
 class FaceActivity : AppCompatActivity(), PanelControlListener {
     val SOFT_INPUT_HEIGHT = 835
     val PANEL_HEIGHT = 1000
@@ -35,7 +32,7 @@ class FaceActivity : AppCompatActivity(), PanelControlListener {
     lateinit var listView: View
     lateinit var contentLayout: LinearLayout
 
-    var isPanelShow = false
+    val chatInputViewModel:ChatInputViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,27 +57,42 @@ class FaceActivity : AppCompatActivity(), PanelControlListener {
                     calculationLayoutSize()
                 }
             })
+
         switchPanelFragment(1)
     }
 
-    fun switchPanelFragment(panelIndex: Int) {
+    private fun switchPanelFragment(panelIndex: Int) {
+        val transaction = supportFragmentManager.beginTransaction()
+            .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
         when (panelIndex) {
-            1 -> supportFragmentManager.beginTransaction()
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                .replace(
-                    R.id.fragment_panel,
-                    faceChatFragment,
-                    faceChatFragment.javaClass.simpleName
-                )
-                .commit()
-            else -> supportFragmentManager.beginTransaction()
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                .replace(
-                    R.id.fragment_panel,
-                    moreInputFragment,
-                    moreInputFragment.javaClass.simpleName
-                )
-                .commit()
+            1 -> {
+                if (faceChatFragment.isAdded) {
+                    transaction.show(faceChatFragment)
+                } else {
+                    transaction.add(
+                        R.id.fragment_panel,
+                        faceChatFragment,
+                        faceChatFragment.javaClass.simpleName
+                    )
+                }
+                if (moreInputFragment.isAdded) {
+                    transaction.hide(moreInputFragment)
+                }
+                transaction.commit()
+            }
+            else -> {
+                if (moreInputFragment.isAdded) {
+                    transaction.show(moreInputFragment)
+                } else {
+                    transaction.add(
+                        R.id.fragment_panel,
+                        moreInputFragment,
+                        moreInputFragment.javaClass.simpleName
+                    )
+                }
+                transaction.hide(faceChatFragment)
+                transaction.commit()
+            }
         }
 
     }
@@ -98,9 +110,13 @@ class FaceActivity : AppCompatActivity(), PanelControlListener {
 
     private fun initKeyBord() {
         val keyBoardInsetsCallBack = KeyBoardInsetsCallBack(object : KeyBoardListener {
-            override fun onAnimStart() {}
+            override fun onAnimStart() {
+                if(SoftKeyBoardUtil.isSoftInputShown(this@FaceActivity)){
+                    chatInputViewModel.panelState=PanelState.HIDE
+                }
+            }
             override fun onAnimDoing(offsetX: Int, offsetY: Int) {
-                if (!isPanelShow && (panelAnimator == null || !panelAnimator!!.isRunning)) {
+                if (chatInputViewModel.panelState != PanelState.SHOW && panelAnimator?.isRunning != true) {
                     contentLayout.translationY = offsetY.toFloat()
                 }
             }
@@ -113,29 +129,41 @@ class FaceActivity : AppCompatActivity(), PanelControlListener {
         )
     }
 
-    private fun panelHide() {
-        if (isPanelShow) {
-            isPanelShow = false
+
+    private fun panelHalf() {
+        if (chatInputViewModel.panelState != PanelState.HALF) {
             panelAnimateTo(-SOFT_INPUT_HEIGHT)
+            chatInputViewModel.panelState = PanelState.HALF
         }
     }
 
     private fun panelShow() {
-        if (!isPanelShow) {
-            isPanelShow = true
+        if (chatInputViewModel.panelState != PanelState.SHOW) {
             panelAnimateTo(-PANEL_HEIGHT)
+            chatInputViewModel.panelState = PanelState.SHOW
+        }
+    }
+
+    private fun panelHide() {
+        if (chatInputViewModel.panelState != PanelState.HIDE) {
+            panelAnimateTo(0)
+            chatInputViewModel.panelState = PanelState.HIDE
         }
     }
 
     private fun panelAnimateTo(offset: Int) {
         panelAnimator = ObjectAnimator.ofFloat(contentLayout, "translationY", offset.toFloat())
-        panelAnimator?.duration = 300
         panelAnimator?.interpolator = FastOutSlowInInterpolator()
         panelAnimator?.start()
     }
 
     override fun onPanelHide() {
+
         panelHide()
+    }
+
+    override fun onPanelHalf() {
+        panelHalf()
     }
 
     override fun onPanelShow() {

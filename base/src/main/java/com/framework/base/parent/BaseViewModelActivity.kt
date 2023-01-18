@@ -1,5 +1,6 @@
 package com.framework.base.parent
 
+import androidx.activity.viewModels
 import androidx.annotation.MainThread
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,7 @@ import kotlin.reflect.KClass
 abstract class BaseViewModelActivity<M : ViewModel, D : ViewDataBinding> :
     BaseBindingActivity<D>() {
 
-    val viewModel: M by viewModels()
+    val viewModel: M by activityViewModels()
 
     /**
      * view model 具体类型
@@ -25,7 +26,7 @@ abstract class BaseViewModelActivity<M : ViewModel, D : ViewDataBinding> :
      * 创建 ViewMode
      */
     @MainThread
-    private fun viewModels(factoryProducer: (() -> ViewModelProvider.Factory)? = null): Lazy<M> {
+    private fun activityViewModels(factoryProducer: (() -> ViewModelProvider.Factory)? = null): Lazy<M> {
         val factoryPromise = factoryProducer ?: {
             defaultViewModelProviderFactory
         }

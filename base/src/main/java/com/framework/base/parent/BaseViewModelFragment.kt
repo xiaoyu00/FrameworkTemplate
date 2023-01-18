@@ -14,7 +14,7 @@ import kotlin.reflect.KClass
  */
 abstract class BaseViewModelFragment<M : ViewModel, D : ViewDataBinding> :
     BaseBindingFragment<D>() {
-    val viewModel: M by viewModels()
+    val viewModel: M by fragmentViewModels()
 
     /**
      * view model 具体类型
@@ -31,7 +31,7 @@ abstract class BaseViewModelFragment<M : ViewModel, D : ViewDataBinding> :
      * 创建ViewModel
      */
     @MainThread
-    private fun viewModels(
+    private fun fragmentViewModels(
         factoryProducer: (() -> ViewModelProvider.Factory)? = null
     ): Lazy<M> {
         return if (isOwner()) {

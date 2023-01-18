@@ -11,7 +11,9 @@ import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.framework.base.R;
 import com.framework.base.component.face.FaceChatFragment;
@@ -44,6 +46,8 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
 
     private String mInputContent;
 
+    private ChatInputViewModel chatInputViewModel ;
+
     @Override
     public int contextViewId() {
         return R.layout.fragment_chat_input;
@@ -51,6 +55,8 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
 
     @Override
     public void initialize() {
+        chatInputViewModel = new ViewModelProvider(requireActivity())
+                .get(ChatInputViewModel.class);
         initFragments();
         initViews();
     }
@@ -159,16 +165,32 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
         });
         dataBinding.chatMessageInput.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     mEmojiInputDisable = false;
                     mAudioInputDisable = false;
                     mMoreInputDisable = false;
-                    panelControlListener.onPanelHide();
+                    panelControlListener.onPanelHalf();
+                    SoftKeyBoardUtil.showSoftInput(requireContext());//体统自动弹出会卡顿
                 }
                 return false;
             }
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(chatInputViewModel.getPanelState()!=PanelState.HIDE){
+                    panelControlListener.onPanelHide();
+                    dataBinding.faceBtn.setImageResource(R.mipmap.chat_input_face);
+                    return;
+                }
+                requireActivity().finish();
+            }
+        };
+
+        //获取Activity的返回键分发器添加回调
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     private void initFragments() {
@@ -189,7 +211,7 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
     }
 
     public void showSoftInput() {
-        panelControlListener.onPanelHide();
+        panelControlListener.onPanelHalf();
         dataBinding.voiceInputSwitch.setImageResource(R.drawable.action_audio_selector);
         dataBinding.faceBtn.setImageResource(R.mipmap.chat_input_face);
         dataBinding.chatVoiceInput.setVisibility(GONE);
@@ -201,14 +223,15 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof PanelControlListener){
-            panelControlListener= (PanelControlListener) context;
+        if (context instanceof PanelControlListener) {
+            panelControlListener = (PanelControlListener) context;
         }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        panelControlListener=null;
+        panelControlListener = null;
     }
+
 }

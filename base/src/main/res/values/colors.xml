@@ -10,6 +10,7 @@
     <color name="red">#ea5450</color>
     <color name="red_pressed">#fb6e6e</color>
     <color name="grey">#FF808080</color>
+    <color name="grey_light">#ECEAEA</color>
     <color name="grey_pressed">#a8a8a8</color>
     <color name="green">#70C160</color>
     <color name="blue">#63aade</color>
