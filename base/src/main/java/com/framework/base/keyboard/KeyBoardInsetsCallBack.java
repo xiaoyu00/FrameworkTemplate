@@ -21,9 +21,11 @@ public class KeyBoardInsetsCallBack extends RootViewDeferringInsetsCallback {
         this(DISPATCH_MODE_STOP, keyboardListener);
     }
 
+    @NonNull
     @Override
-    public void onPrepare(@NonNull WindowInsetsAnimationCompat animation) {
-        keyboardListener.onAnimStart();
+    public WindowInsetsAnimationCompat.BoundsCompat onStart(@NonNull WindowInsetsAnimationCompat animation, @NonNull WindowInsetsAnimationCompat.BoundsCompat bounds) {
+        keyboardListener.onAnimStart(bounds.getUpperBound().bottom - bounds.getLowerBound().bottom);
+        return super.onStart(animation, bounds);
     }
 
     @NonNull
@@ -37,7 +39,7 @@ public class KeyBoardInsetsCallBack extends RootViewDeferringInsetsCallback {
         // the insets to be >= 0, to make sure we don't use negative insets.
         Insets subtract = Insets.subtract(typesInset, otherInset);
         Insets diff = Insets.max(subtract, Insets.NONE);
-        keyboardListener.onAnimDoing(diff.left - diff.right,diff.top - diff.bottom);
+        keyboardListener.onAnimDoing(diff.left - diff.right, diff.top - diff.bottom);
         return insets;
     }
 

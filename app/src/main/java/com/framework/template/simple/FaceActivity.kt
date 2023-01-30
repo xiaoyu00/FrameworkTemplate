@@ -23,7 +23,6 @@ import com.framework.template.R
  */
 
 class FaceActivity : AppCompatActivity(), PanelControlListener {
-    val SOFT_INPUT_HEIGHT = 835
     val PANEL_HEIGHT = 1000
     private val faceChatFragment = FaceChatFragment()
     private val moreInputFragment = MoreInputFragment()
@@ -110,18 +109,31 @@ class FaceActivity : AppCompatActivity(), PanelControlListener {
 
     private fun initKeyBord() {
         val keyBoardInsetsCallBack = KeyBoardInsetsCallBack(object : KeyBoardListener {
-            override fun onAnimStart() {
-                if(SoftKeyBoardUtil.isSoftInputShown(this@FaceActivity)){
-                    chatInputViewModel.panelState=PanelState.HIDE
+            override fun onAnimStart(moveDistance:Int) {
+                chatInputViewModel.isPanelShow = when (chatInputViewModel.handleType) {
+                    HandleType.ONLY_PANEL_DOWN -> false
+                    HandleType.ONLY_PANEL_UP -> true
+                    HandleType.ONLY_KEYBOARD_DOWN -> false
+                    HandleType.ONLY_KEYBOARD_UP -> false
+                    HandleType.KD_PU -> {
+                        panelAnimateTo(-PANEL_HEIGHT)
+                        true
+                    }
+                    HandleType.KU_PD -> {
+                        panelAnimateTo(-moveDistance)
+                        false
+                    }
                 }
             }
             override fun onAnimDoing(offsetX: Int, offsetY: Int) {
-                if (chatInputViewModel.panelState != PanelState.SHOW && panelAnimator?.isRunning != true) {
+                if (chatInputViewModel.handleType != HandleType.KU_PD && chatInputViewModel.handleType != HandleType.KD_PU) {
                     contentLayout.translationY = offsetY.toFloat()
                 }
             }
 
-            override fun onAnimEnd() {}
+            override fun onAnimEnd() {
+                chatInputViewModel.handleType= HandleType.ONLY_KEYBOARD_UP
+            }
         })
         ViewCompat.setWindowInsetsAnimationCallback(
             window.decorView,
@@ -130,44 +142,21 @@ class FaceActivity : AppCompatActivity(), PanelControlListener {
     }
 
 
-    private fun panelHalf() {
-        if (chatInputViewModel.panelState != PanelState.HALF) {
-            panelAnimateTo(-SOFT_INPUT_HEIGHT)
-            chatInputViewModel.panelState = PanelState.HALF
-        }
-    }
-
-    private fun panelShow() {
-        if (chatInputViewModel.panelState != PanelState.SHOW) {
-            panelAnimateTo(-PANEL_HEIGHT)
-            chatInputViewModel.panelState = PanelState.SHOW
-        }
-    }
-
-    private fun panelHide() {
-        if (chatInputViewModel.panelState != PanelState.HIDE) {
-            panelAnimateTo(0)
-            chatInputViewModel.panelState = PanelState.HIDE
-        }
-    }
-
     private fun panelAnimateTo(offset: Int) {
         panelAnimator = ObjectAnimator.ofFloat(contentLayout, "translationY", offset.toFloat())
         panelAnimator?.interpolator = FastOutSlowInInterpolator()
         panelAnimator?.start()
     }
 
-    override fun onPanelHide() {
-
-        panelHide()
-    }
-
-    override fun onPanelHalf() {
-        panelHalf()
-    }
-
     override fun onPanelShow() {
-        panelShow()
+        if(!chatInputViewModel.isPanelShow){
+            panelAnimateTo(-PANEL_HEIGHT)
+        }
+    }
+    override fun onPanelHide() {
+        if(chatInputViewModel.isPanelShow){
+            panelAnimateTo(0)
+        }
     }
 
     override fun onSwitchPanelFragment(index: Int) {

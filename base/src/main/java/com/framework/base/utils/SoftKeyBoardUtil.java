@@ -12,7 +12,7 @@ import android.view.inputmethod.InputMethodManager;
  */
 public class SoftKeyBoardUtil {
     /**
-     * 获取软键盘高度
+     * 获取软键盘高度(在华为手机高度不准确)
      * @param context
      * @return
      */
@@ -53,7 +53,7 @@ public class SoftKeyBoardUtil {
         int screenHeight = decorView.getHeight();
         Rect rect = new Rect();
         decorView.getWindowVisibleDisplayFrame(rect);
-        return screenHeight - rect.bottom - ScreenUtils.INSTANCE.getNavigateBarHeight(context) >= 0;
+        return screenHeight - rect.bottom - ScreenUtils.INSTANCE.getNavigateBarHeight(context) > 0;
     }
 }
 

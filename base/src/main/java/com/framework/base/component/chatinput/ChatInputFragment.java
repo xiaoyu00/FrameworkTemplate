@@ -42,11 +42,17 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
 
     private FaceChatFragment faceChatFragment;
 
+    /**
+     * 表情面板控制回调
+     */
     private PanelControlListener panelControlListener;
 
     private String mInputContent;
 
-    private ChatInputViewModel chatInputViewModel ;
+    private ChatInputViewModel chatInputViewModel;
+
+
+
 
     @Override
     public int contextViewId() {
@@ -70,18 +76,22 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
         dataBinding.voiceInputSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                chatInputViewModel.setHandleType(HandleType.ONLY_PANEL_DOWN);
                 panelControlListener.onPanelHide();
+                chatInputViewModel.setPanelShow(false);
                 dataBinding.faceBtn.setImageResource(R.drawable.action_face_selector);
                 if (mAudioInputDisable) {
                     dataBinding.chatVoiceInput.setVisibility(GONE);
                     dataBinding.chatMessageInput.setVisibility(VISIBLE);
                     dataBinding.voiceInputSwitch.setImageResource(R.drawable.action_audio_selector);
                     dataBinding.chatMessageInput.requestFocus();
+                    chatInputViewModel.setHandleType(HandleType.ONLY_KEYBOARD_UP);
                     showSoftInput();
                 } else {
                     dataBinding.voiceInputSwitch.setImageResource(R.mipmap.chat_input_keyboard);
                     dataBinding.chatVoiceInput.setVisibility(VISIBLE);
                     dataBinding.chatMessageInput.setVisibility(GONE);
+                    chatInputViewModel.setHandleType(HandleType.ONLY_KEYBOARD_DOWN);
                     SoftKeyBoardUtil.hideSoftInput(requireContext(), dataBinding.chatMessageInput.getWindowToken());
                 }
                 mAudioInputDisable = !mAudioInputDisable;
@@ -93,6 +103,7 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
             @Override
             public void onClick(View v) {
                 if (mEmojiInputDisable) {
+                    chatInputViewModel.setHandleType(HandleType.KU_PD);
                     showSoftInput();
                 } else {
                     dataBinding.voiceInputSwitch.setImageResource(R.drawable.action_audio_selector);
@@ -101,8 +112,15 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
                     dataBinding.chatVoiceInput.setVisibility(GONE);
                     dataBinding.chatMessageInput.setVisibility(VISIBLE);
                     panelControlListener.onSwitchPanelFragment(1);
-                    panelControlListener.onPanelShow();
-                    SoftKeyBoardUtil.hideSoftInput(requireContext(), dataBinding.chatMessageInput.getWindowToken());
+
+                    if (SoftKeyBoardUtil.isSoftInputShown(requireContext())) {
+                        SoftKeyBoardUtil.hideSoftInput(requireContext(), dataBinding.chatMessageInput.getWindowToken());
+                        chatInputViewModel.setHandleType(HandleType.KD_PU);
+                    } else {
+                        chatInputViewModel.setHandleType(HandleType.ONLY_PANEL_UP);
+                        panelControlListener.onPanelShow();
+                        chatInputViewModel.setPanelShow(true);
+                    }
                 }
                 mEmojiInputDisable = !mEmojiInputDisable;
                 mAudioInputDisable = false;
@@ -113,14 +131,21 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
             @Override
             public void onClick(View v) {
                 if (mMoreInputDisable) {
+                    chatInputViewModel.setHandleType(HandleType.KU_PD);
                     showSoftInput();
                 } else {
-                    SoftKeyBoardUtil.hideSoftInput(requireContext(), dataBinding.chatMessageInput.getWindowToken());
                     dataBinding.voiceInputSwitch.setImageResource(R.drawable.action_audio_selector);
                     dataBinding.faceBtn.setImageResource(R.drawable.action_face_selector);
                     dataBinding.chatVoiceInput.setVisibility(GONE);
                     dataBinding.chatMessageInput.setVisibility(VISIBLE);
-                    panelControlListener.onPanelShow();
+                    if (SoftKeyBoardUtil.isSoftInputShown(requireContext())) {
+                        SoftKeyBoardUtil.hideSoftInput(requireContext(), dataBinding.chatMessageInput.getWindowToken());
+                        chatInputViewModel.setHandleType(HandleType.KD_PU);
+                    } else {
+                        chatInputViewModel.setHandleType(HandleType.ONLY_PANEL_UP);
+                        panelControlListener.onPanelShow();
+                        chatInputViewModel.setPanelShow(true);
+                    }
                     panelControlListener.onSwitchPanelFragment(2);
                 }
                 mEmojiInputDisable = false;
@@ -170,8 +195,12 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
                     mEmojiInputDisable = false;
                     mAudioInputDisable = false;
                     mMoreInputDisable = false;
-                    panelControlListener.onPanelHalf();
-                    SoftKeyBoardUtil.showSoftInput(requireContext());//体统自动弹出会卡顿
+                    if (chatInputViewModel.isPanelShow()) {
+                        chatInputViewModel.setHandleType(HandleType.KD_PU);
+                    } else {
+                        chatInputViewModel.setHandleType(HandleType.ONLY_KEYBOARD_UP);
+                    }
+                    SoftKeyBoardUtil.showSoftInput(requireContext());
                 }
                 return false;
             }
@@ -180,8 +209,10 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if(chatInputViewModel.getPanelState()!=PanelState.HIDE){
+                if (chatInputViewModel.isPanelShow()) {
+                    chatInputViewModel.setHandleType(HandleType.ONLY_PANEL_DOWN);
                     panelControlListener.onPanelHide();
+                    chatInputViewModel.setPanelShow(false);
                     dataBinding.faceBtn.setImageResource(R.mipmap.chat_input_face);
                     return;
                 }
@@ -211,7 +242,6 @@ public class ChatInputFragment extends BaseBindingFragment<FragmentChatInputBind
     }
 
     public void showSoftInput() {
-        panelControlListener.onPanelHalf();
         dataBinding.voiceInputSwitch.setImageResource(R.drawable.action_audio_selector);
         dataBinding.faceBtn.setImageResource(R.mipmap.chat_input_face);
         dataBinding.chatVoiceInput.setVisibility(GONE);
