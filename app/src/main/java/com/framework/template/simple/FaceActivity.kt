@@ -23,7 +23,7 @@ import com.framework.template.R
  */
 
 class FaceActivity : AppCompatActivity(), PanelControlListener {
-    val PANEL_HEIGHT = 1000
+    var PANEL_HEIGHT = 1000
     private val faceChatFragment = FaceChatFragment()
     private val moreInputFragment = MoreInputFragment()
     private val chatInputFragment = ChatInputFragment()
@@ -42,7 +42,6 @@ class FaceActivity : AppCompatActivity(), PanelControlListener {
         listView = findViewById(R.id.view_list)
         contentLayout = findViewById<LinearLayout>(R.id.layout_content)
         initView()
-        initKeyBord()
     }
 
     private fun initView() {
@@ -54,6 +53,7 @@ class FaceActivity : AppCompatActivity(), PanelControlListener {
                 override fun onGlobalLayout() {
                     contentLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     calculationLayoutSize()
+                    initKeyBord()
                 }
             })
 
@@ -101,6 +101,7 @@ class FaceActivity : AppCompatActivity(), PanelControlListener {
         val layoutParams = contentLayout.layoutParams as FrameLayout.LayoutParams
         val layoutParams2 = listView.layoutParams as LinearLayout.LayoutParams
         val cHeight: Int = contentLayout.height
+        PANEL_HEIGHT=(cHeight*0.45).toInt()
         layoutParams2.height = cHeight
         listView.layoutParams = layoutParams2
         layoutParams.height = cHeight + PANEL_HEIGHT
