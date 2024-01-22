@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * textView 跑马灯效果
+ * 支付（微信，支付宝）
  */
 class PayActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

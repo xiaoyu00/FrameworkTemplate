@@ -4,6 +4,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 
+/**
+ * 进制转换
+ */
 public class RadixCovertUtils {
 
 	public static void main(String[] args) throws IOException {

@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- 设置底部导航栏样式 -->
-<!--        <item name="bottomNavigationStyle">@style/NavigationStyle</item>-->
-<!--        <item name="badgeStyle">@style/BadgeStyle</item>-->
+        <!--        <item name="bottomNavigationStyle">@style/NavigationStyle</item>-->
+        <!--        <item name="badgeStyle">@style/BadgeStyle</item>-->
     </style>
 </resources>

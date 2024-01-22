@@ -26,7 +26,8 @@ class PermissionActivity : AppCompatActivity() {
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.FOREGROUND_SERVICE,
         Manifest.permission.RECORD_AUDIO,
-        Manifest.permission.MODIFY_AUDIO_SETTINGS
+        Manifest.permission.MODIFY_AUDIO_SETTINGS,
+        Manifest.permission.SYSTEM_ALERT_WINDOW
     )
     private var isFirst = true
     private var alertDialog: AlertDialog? = null

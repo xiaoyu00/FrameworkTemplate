@@ -97,6 +97,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="输入表情" />
+            <Button
+                android:id="@+id/btn_wechat_download"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="仿微信文件打开" />
+            <Button
+                android:id="@+id/btn_dual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="双屏异显" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

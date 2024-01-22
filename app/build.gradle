@@ -5,8 +5,8 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "30.0.3"
+    compileSdk 33
+    buildToolsVersion '33.0.1'
 
     defaultConfig {
         applicationId "com.framework.template"
@@ -19,6 +19,9 @@ android {
         ndk {
             //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
             abiFilters 'armeabi-v7a'//, 'armeabi','x86'//,'armeabi-v7a', 'arm64-v8a'
+        }
+        vectorDrawables {
+            useSupportLibrary true
         }
     }
     signingConfigs {
@@ -39,7 +42,7 @@ android {
         variant.outputs.all {
             def releaseTime = new Date().format("MMdd", TimeZone.getDefault())
             if ("release" == variant.buildType.name) {
-                outputFileName = "夜陌${versionName}_${releaseTime}.apk"
+                outputFileName = "模板${versionName}_${releaseTime}.apk"
             }
         }
     }
@@ -60,6 +63,14 @@ android {
     buildFeatures {
         dataBinding true
         viewBinding true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.3'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
     }
 }
 
@@ -91,6 +102,14 @@ dependencies {
     implementation project(path: ':platformverify')
     implementation project(path: ':share')
     implementation project(path: ':mediaselect')
+    implementation 'androidx.activity:activity-compose:1.7.2'
+    implementation platform('androidx.compose:compose-bom:2023.03.00')
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.ui:ui-graphics'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    implementation 'androidx.compose.material3:material3'
+    androidTestImplementation platform('androidx.compose:compose-bom:2023.03.00')
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     // 须iava 8支持
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
     // Java8 support for Lifecycles
@@ -114,7 +133,7 @@ dependencies {
     //利用 Reactive Streams KTX 模块可根据 ReactiveStreams 发布程序来创建可监测的 LiveData 流
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.1"
     //Room 扩展程序增加了对数据库事务的协程支持。
-    implementation "androidx.room:room-ktx:2.3.0"
+    implementation "androidx.room:room-ktx:2.5.1"
     //SQLite 扩展程序将与 SQL 相关的代码封装在事务中，从而避免编写大量样板代码。
     implementation "androidx.sqlite:sqlite-ktx:2.1.0"
     //WorkManager KTX
@@ -145,4 +164,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    debugImplementation 'androidx.compose.ui:ui-tooling'
+    debugImplementation 'androidx.compose.ui:ui-test-manifest'
 }

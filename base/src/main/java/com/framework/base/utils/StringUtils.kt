@@ -235,7 +235,9 @@ object StringUtils {
         strUUID = strUUID.replace("-".toRegex(), "").toLowerCase()
         return strUUID
     }
-
+    fun isEmpty(cs: CharSequence?): Boolean {
+        return cs == null || cs.isEmpty()
+    }
     /**
      * 手机号码，中间4位星号替换
      *

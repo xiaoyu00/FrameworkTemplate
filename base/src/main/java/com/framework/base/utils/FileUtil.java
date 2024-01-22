@@ -68,6 +68,12 @@ public class FileUtil {
         return storagePath;
     }
 
+    /**
+     * 删除文件
+     *
+     * @param url
+     * @return
+     */
     public static boolean deleteFile(String url) {
         boolean result = false;
         File file = new File(url);
@@ -75,6 +81,24 @@ public class FileUtil {
             result = file.delete();
         }
         return result;
+    }
+
+    /**
+     * 删除文件夹（文件夹以及文件夹下所有的文件）
+     *
+     * @return
+     */
+    public static boolean deleteDirWithFile(File dir) {
+        if (!dir.exists() || !dir.isDirectory()) {
+            return false;
+        }
+        for (File file : Objects.requireNonNull(dir.listFiles())) {
+            if (file.isFile()) {
+                file.delete();// 删除所有文件
+            } else if (file.isDirectory())
+                deleteDirWithFile(file); // 递规的方式删除文件夹
+        }
+        return dir.delete();// 删除目录本身
     }
 
     public static boolean isExternalStorageWritable() {
@@ -95,17 +119,19 @@ public class FileUtil {
         }
         return filePath;
     }
-    public String getCachePath( Context context ){
-        String cachePath ;
+
+    public String getCachePath(Context context) {
+        String cachePath;
         if (isExternalStorageWritable()) {
             //外部存储可用
-            cachePath = context.getExternalCacheDir().getPath() ;
-        }else {
+            cachePath = context.getExternalCacheDir().getPath();
+        } else {
             //外部存储不可用
-            cachePath = context.getCacheDir().getPath() ;
+            cachePath = context.getCacheDir().getPath();
         }
-        return cachePath ;
+        return cachePath;
     }
+
     /**
      * @param context
      * @param chooseMode
@@ -727,7 +753,7 @@ public class FileUtil {
         String filename = null;
 
         if (mimeType == null && context != null) {
-            filename = getName(uri.toString());
+            filename = getFileNameFromPath(uri.toString());
         } else {
             Cursor returnCursor = context.getContentResolver().query(uri, null,
                     null, null, null);
@@ -742,12 +768,29 @@ public class FileUtil {
         return filename;
     }
 
-    private static String getName(String filename) {
-        if (filename == null) {
-            return null;
+    private static String getFileNameFromPath(String filepath) {
+        if ((filepath != null) && (filepath.length() > 0)) {
+            int sep = filepath.lastIndexOf('/');
+            if ((sep > -1) && (sep < filepath.length() - 1)) {
+                return filepath.substring(sep + 1);
+            }
         }
-        int index = filename.lastIndexOf('/');
-        return filename.substring(index + 1);
+        return filepath;
+    }
+
+    public static String getFileNameNoEx(String filename) {
+        if ((filename != null) && (filename.length() > 0)) {
+            int dot = filename.lastIndexOf('.');
+            if ((dot > -1) && (dot < (filename.length()))) {
+                return filename.substring(0, dot);
+            }
+        }
+        return filename;
+    }
+
+    public static String getMimeType(File file) {
+
+        return MimeTypeMap.getSingleton().getMimeTypeFromExtension(getFileExtensionFromUrl(file.getPath()));
     }
 
     public static void openFile(Context context, String path, String authority, String fileName) {

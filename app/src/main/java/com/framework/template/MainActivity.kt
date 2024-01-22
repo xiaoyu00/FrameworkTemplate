@@ -15,6 +15,7 @@ class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.RECORD_AUDIO,
         Manifest.permission.CAMERA,
+        Manifest.permission.SYSTEM_ALERT_WINDOW,
     )
 
     override fun contextViewId() = R.layout.activity_main
@@ -57,6 +58,12 @@ class MainActivity : BaseViewModelActivity<SimpleViewModel, ActivityMainBinding>
         }
         dataBinding.btnFace.setOnClickListener {
             startActivity(Intent(this, FaceActivity::class.java))
+        }
+        dataBinding.btnWechatDownload.setOnClickListener {
+            startActivity(Intent(this, WeChatDownloadActivity::class.java))
+        }
+        dataBinding.btnDual.setOnClickListener {
+            startActivity(Intent(this, DualScreenActivity::class.java))
         }
     }
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:context=".simple.DualScreenActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="主 屏 幕"
+            android:textSize="28sp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_show"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="打开副屏"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="关闭副屏"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</layout>
