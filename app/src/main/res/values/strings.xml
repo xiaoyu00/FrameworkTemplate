@@ -8,4 +8,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_my">我的</string>
     <string name="title_activity_dual_screen">DualScreenActivity</string>
+    <string name="string_tips">我的名字叫%s</string>
 </resources>
