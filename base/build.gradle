@@ -13,6 +13,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -50,6 +56,7 @@ dependencies {
      * glide
      */
     implementation 'com.github.bumptech.glide:glide:4.13.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-android:2.8.6'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
     /**
      * 架构组件单独依赖（上面已经包含）
@@ -84,8 +91,12 @@ dependencies {
     implementation "androidx.palette:palette-ktx:1.0.0"
     //利用 Reactive Streams KTX 模块可根据 ReactiveStreams 发布程序来创建可监测的 LiveData 流
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.1"
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
     //Room 扩展程序增加了对数据库事务的协程支持。
-    implementation "androidx.room:room-ktx:2.3.0"
+    implementation "androidx.room:room-ktx:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
     //SQLite 扩展程序将与 SQL 相关的代码封装在事务中，从而避免编写大量样板代码。
     implementation "androidx.sqlite:sqlite-ktx:2.1.0"
     //WorkManager KTX

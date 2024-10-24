@@ -76,6 +76,11 @@ android {
 
 dependencies {
 
+    // 开源gis地图库 osmdroid
+    implementation 'org.osmdroid:osmdroid-android:6.1.18'
+    implementation 'org.osmdroid:osmdroid-wms:6.1.18'
+
+
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.0'
 
     //com.blankj:utilcode 工具类
@@ -160,6 +165,11 @@ dependencies {
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+
+    // 高德
+    implementation 'com.amap.api:location:6.4.0'
+    implementation 'com.amap.api:3dmap:9.0.0'
+    implementation 'com.amap.api:search:3.3.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

@@ -19,15 +19,14 @@ import com.framework.template.R;
 public class DaemonService extends Service {
     private String TAG = DaemonService.class.getSimpleName();
     private long RECEIVER_INTERVAL = 5000L;
-    private String notificationId = "serviceid";
-
+    private String channelId = "work_channel_id";
     public Notification getNotification() {
         Notification.Builder builder = new Notification.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(getResources().getText(R.string.app_name))
                 .setContentText(getResources().getText(R.string.app_name) + "正在后台运行");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder.setChannelId(notificationId);
+            builder.setChannelId(channelId);
         }
         Notification notification = builder.build();
         return notification;
@@ -45,7 +44,7 @@ public class DaemonService extends Service {
             //数字是随便写的“40”，
             nm.createNotificationChannel(
                     new NotificationChannel(
-                            "WorkService_id",
+                            channelId,
                             "WorkService",
                             NotificationManager.IMPORTANCE_DEFAULT
                     )

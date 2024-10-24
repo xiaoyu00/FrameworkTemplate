@@ -31,7 +31,7 @@ abstract class BaseRetrofitClient {
 
     abstract fun handleBuilder(builder: OkHttpClient.Builder)
 
-    open fun <Service> getService(serviceClass: Class<Service>, baseUrl: String): Service {
+    protected fun <Service> getService(serviceClass: Class<Service>, baseUrl: String): Service {
         return Retrofit.Builder()
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())

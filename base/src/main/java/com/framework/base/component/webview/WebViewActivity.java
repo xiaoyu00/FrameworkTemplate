@@ -31,6 +31,7 @@ public class WebViewActivity extends AppCompatActivity {
         // 设置可以访问文件s
         webSettings.setAllowFileAccess(true);
         webView.loadUrl(url);
+//        webSettings.setJavaScriptEnabled(true);
         //webView.loadData(); ///加载string类型数据 如html代码
         //webView.loadUrl("file:///android_asset/icon.png");  //工程目录assets 图片文件
         //webView.loadUrl("file:///android_asset/index.html");  //工程目录assets index.html文件

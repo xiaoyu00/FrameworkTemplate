@@ -53,6 +53,8 @@ class PermissionActivity : AppCompatActivity() {
                     Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                     1008612
                 )
+            }else{
+               // do
             }
         } else {
             PermissionUtils.requestMorePermissions(this, listOf(*permissions), 1008611)
@@ -112,6 +114,8 @@ class PermissionActivity : AppCompatActivity() {
                         Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                         1008612
                     )
+                }else{
+                    // do
                 }
             }
             if (permissions.size == 1 && permissions[0] == Manifest.permission.ACCESS_BACKGROUND_LOCATION) {

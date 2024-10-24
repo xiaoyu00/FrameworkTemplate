@@ -6,7 +6,8 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-
+    <!-- 无此权限，动态申请权限不弹框 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -32,9 +33,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /><!-- 双屏异显需要 -->
-    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" /><!-- 双屏异显需要 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 双屏异显需要 -->
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
     <application
         android:name="com.framework.base.BaseApplication"
@@ -46,6 +46,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FrameworkTemplate"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".simple.gismap.OsmAndroidActivity"
+            android:exported="false" />
         <!-- 设置true后可使用http -->
         <activity
             android:name=".MainActivity"
@@ -87,6 +90,12 @@
             android:launchMode="singleTop" />
 
         <service android:name="com.framework.base.component.socket.SocketService" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="3ee0851f031b3f11df8a5f4779a4bc06" />
+        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+        <service android:name="com.amap.api.location.APSService" />
     </application>
 
 </manifest>

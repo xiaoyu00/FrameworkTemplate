@@ -9,4 +9,9 @@
     <string name="title_my">我的</string>
     <string name="title_activity_dual_screen">DualScreenActivity</string>
     <string name="string_tips">我的名字叫%s</string>
+    <string name="xiaomi_tip">检测到您当前手机型号为小米手机，点击\"去设置\"将应用设置为\"无限制\"模式，否则将影响应用正常使用</string>
+    <string name="huawei_tip">检测到您当前手机型号为华为手机，请按以下步骤设置，点击\"去设置 \n -> 电池（耗电详情）\n -> 启动应用管理 \n -> 关闭\"自动管理\" \n -> 打开\"允许自启动\" \n -> 打开\"允许后台运行\" \n -> 确定" \n 否则将影响应用正常使用</string>
+    <string name="vivo_tip">检测到您当前手机型号为VIVO手机，点击\"去设置\" 开启\"自启动\" ,开启\"锁屏显示\",开启\"后台弹出界面\" ，否则将影响应用正常使用</string>
+    <string name="meizu_tip">检测到您当前手机型号为魅族手机，点击\"去设置\"，打开\"通知栏消息\"开关，点击\"后台管理\"，选择\"允许后台运行\"，点击\"锁屏下显示界面\"，选择\"允许\"，否则将影响应用正常使用</string>
+    <string name="txt_setting">请点击\"去设置\"，打开\"通知栏消息\"开关，点击\"后台管理\"，选择\"允许后台运行\"，点击\"锁屏下显示界面\"，选择\"允许\"，否则将影响应用正常使用</string>
 </resources>

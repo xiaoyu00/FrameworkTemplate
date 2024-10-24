@@ -16,7 +16,7 @@ import android.util.Log
 abstract class WorkService : Service() {
     private val TAG: String = WorkService::class.java.simpleName
     private val RECEIVER_INTERVAL = 5000L
-
+    val channelId="work_channel_id"
     // 启动notification的id，两次启动应是同一个id
     private val NOTIFICATION_ID = Process.myPid()
     private val mRunnable = Runnable {
@@ -43,7 +43,7 @@ abstract class WorkService : Service() {
             //数字是随便写的“40”，
             nm.createNotificationChannel(
                 NotificationChannel(
-                    "WorkService_id",
+                    channelId,
                     "WorkService",
                     NotificationManager.IMPORTANCE_DEFAULT
                 )
