@@ -1,4 +1,4 @@
-package com.framework.template.simple;
+package com.framework.template.stayalive;
 
 import android.os.PowerManager;
 
