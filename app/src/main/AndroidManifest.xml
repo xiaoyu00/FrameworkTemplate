@@ -96,6 +96,8 @@
             android:value="3ee0851f031b3f11df8a5f4779a4bc06" />
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
+        <!-- foregroundServiceType有多种具体查看官网 -->
+        <service android:name=".stayalive.AMapLocationService" android:foregroundServiceType="location"/>
     </application>
 
 </manifest>

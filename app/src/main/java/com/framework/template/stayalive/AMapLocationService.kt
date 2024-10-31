@@ -17,7 +17,8 @@ import com.amap.api.maps.MapsInitializer
 
 /**
  * 高德定位Service
- * 把定位放到service中，通过不断刷新Notification，来实现cpu唤醒，达到熄屏后持续定位效果（在华为手机省电模式下无效）
+ * 把定位放到service中，通过不断刷新Notification，来实现cpu唤醒，达到熄屏后持续定位效果,
+ * 配合android:foregroundServiceType="location"使用效果更好（在华为手机省电模式下无效，一段时间后会被杀死）
  *
  *注：与StayAliveActivity熄屏保护配合效果更好
  * 为了进一步保活，可以使用音乐app的方式
